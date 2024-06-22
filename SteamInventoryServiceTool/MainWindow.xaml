@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="Steam Inventory Service Tool" Height="400" Width="600" ResizeMode="CanMinimize" Icon="/AppLogo_Small.png">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="File"/>
+            <MenuItem Header="Edit"/>
+            <MenuItem Header="View"/>
+        </Menu>
+        <ListView x:Name="ItemsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=25}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
