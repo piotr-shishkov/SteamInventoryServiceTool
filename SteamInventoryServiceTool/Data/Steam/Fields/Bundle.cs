@@ -76,7 +76,7 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
 					jsonString += ";";
 				}
 			}
-			writer.WriteValue(value);
+			writer.WriteValue(jsonString);
 		}
 	}
 }
