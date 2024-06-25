@@ -19,10 +19,11 @@ namespace SteamInventoryServiceTool.Windows
 
         public async void UpdateItem(Item item)
         {
-            ItemNameLabel.ContentStringFormat = item.Name;
-            ItemTypeLabel.ContentStringFormat = item.DisplayType;
+            ItemNameLabel.Content = item.Name;
+            ItemTypeLabel.Content = item.DisplayType;
             ItemDescription.Text = item.Description;
             ItemTags.Text = FormatTags(item);
+            ItemPriceLabel.Content = item.PriceCategory.ToString();
 
             ItemNameLabel.Foreground = new SolidColorBrush(item.NameColor.Color);
             ItemFrame.Stroke = new SolidColorBrush(item.BackgroundColor.Color);
@@ -51,6 +52,7 @@ namespace SteamInventoryServiceTool.Windows
                 Name = "Test Item",
                 DisplayType = "Common Item",
                 Description = "Some interesting description about this item...",
+                PriceCategory = new PriceCategory(PriceCategories.VLV1000),
                 BackgroundColor = new HexColor(134, 80, 172),
                 NameColor = new HexColor(134, 80, 172),
                 IconUrlLarge = "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQh5hlcX0nvUOGsx8DdQBJjIAVHubSaIAlp1fb3ZjRG48u7lYuOhbmiZLmElGgIvJxzjLiYodWi3wGwrxE_MWmgI4SUJFc8Zl_R_VPqybvqm9bi6-x3KLPD/330x192?allow_animated=1",

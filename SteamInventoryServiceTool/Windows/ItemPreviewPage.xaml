@@ -46,6 +46,7 @@
             <Label x:Name="ItemTypeLabel" Content="Item Type" Margin="41,0,0,0" Grid.Row="5" VerticalAlignment="Bottom" Foreground="#FF767676" FontFamily="Arial" FontSize="14" Padding="0,0,0,0" Width="244" HorizontalAlignment="Left" Height="18" VerticalContentAlignment="Bottom"/>
             <TextBlock x:Name="ItemDescription" TextWrapping="Wrap" Text="Item Description Here" Grid.Row="7" Foreground="#FFB4B4B4" FontSize="14" TextTrimming="WordEllipsis"/>
             <TextBlock x:Name="ItemTags" TextWrapping="Wrap" Text="Tags:" Grid.Row="9" Foreground="#FF969696" FontSize="14" TextTrimming="WordEllipsis"/>
+            <Label x:Name="ItemPriceLabel" Content="$0.00" Foreground="#FFD2D2D2" FontFamily="Arial" FontSize="20" VerticalContentAlignment="Center" Padding="0,0,0,0" Grid.RowSpan="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         </Grid>
 
     </Grid>
