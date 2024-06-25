@@ -6,7 +6,9 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
 {
     public class HexColor
     {
-        public Color Color { get; set; }
+        public Color Color { get; set; } = Color.White;
+
+        public HexColor() { }
 
         public HexColor(int r, int g, int b)
         {
@@ -19,9 +21,9 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
         public override HexColor? ReadJson(JsonReader reader, Type objectType, HexColor? existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             var jsonString = reader.Value as string;
-            if(jsonString == null)
+            if (jsonString == null)
             {
-                return new HexColor(1, 1, 1);
+                return new HexColor();
             }
             var color = ColorTranslator.FromHtml(jsonString);
             return new HexColor(color.R, color.G, color.B);
@@ -29,7 +31,7 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
 
         public override void WriteJson(JsonWriter writer, HexColor? value, JsonSerializer serializer)
         {
-            if(value == null)
+            if (value == null)
             {
                 writer.WriteNull();
                 return;
