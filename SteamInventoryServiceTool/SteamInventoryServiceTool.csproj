@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="AppLogo.png" />
-    <None Remove="AppLogo_Small.png" />
     <None Remove="Resources\AppLogo.png" />
     <None Remove="Resources\AppLogo_Small.png" />
   </ItemGroup>
@@ -19,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="AppLogo.png" />
-    <Resource Include="AppLogo_Small.png" />
     <Resource Include="Resources\AppLogo.png" />
     <Resource Include="Resources\AppLogo_Small.png" />
   </ItemGroup>
