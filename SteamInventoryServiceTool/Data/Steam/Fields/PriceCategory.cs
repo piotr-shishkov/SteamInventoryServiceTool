@@ -11,6 +11,58 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
         {
             Category = category;
         }
+
+        public override string ToString()
+        {
+            return Category switch
+            {
+                PriceCategories.None => "",
+                PriceCategories.VLV25 => "$0.25",
+                PriceCategories.VLV50 => "$0.49",
+                PriceCategories.VLV75 => "$0.75",
+                PriceCategories.VLV100 => "$0.99",
+                PriceCategories.VLV150 => "$1.49",
+                PriceCategories.VLV200 => "$1.99",
+                PriceCategories.VLV250 => "$2.49",
+                PriceCategories.VLV300 => "$2.99",
+                PriceCategories.VLV350 => "$3.49",
+                PriceCategories.VLV400 => "$3.99",
+                PriceCategories.VLV450 => "$4.49",
+                PriceCategories.VLV500 => "$4.99",
+                PriceCategories.VLV550 => "$5.49",
+                PriceCategories.VLV600 => "$5.99",
+                PriceCategories.VLV650 => "$6.49",
+                PriceCategories.VLV700 => "$6.99",
+                PriceCategories.VLV750 => "$7.49",
+                PriceCategories.VLV800 => "$7.99",
+                PriceCategories.VLV850 => "$8.49",
+                PriceCategories.VLV900 => "$8.99",
+                PriceCategories.VLV950 => "$9.49",
+                PriceCategories.VLV1000 => "$9.99",
+                PriceCategories.VLV1100 => "$10.09",
+                PriceCategories.VLV1200 => "$11.99",
+                PriceCategories.VLV1300 => "$12.99",
+                PriceCategories.VLV1400 => "$13.99",
+                PriceCategories.VLV1500 => "$14.99",
+                PriceCategories.VLV1600 => "$15.99",
+                PriceCategories.VLV1700 => "$16.99",
+                PriceCategories.VLV1800 => "$17.99",
+                PriceCategories.VLV1900 => "$18.99",
+                PriceCategories.VLV2000 => "$19.99",
+                PriceCategories.VLV2500 => "$24.99",
+                PriceCategories.VLV3000 => "$29.99",
+                PriceCategories.VLV3500 => "$34.99",
+                PriceCategories.VLV4000 => "$39.99",
+                PriceCategories.VLV4500 => "$44.99",
+                PriceCategories.VLV5000 => "$49.99",
+                PriceCategories.VLV6000 => "$59.99",
+                PriceCategories.VLV7000 => "$69.99",
+                PriceCategories.VLV8000 => "$79.99",
+                PriceCategories.VLV9000 => "$89.99",
+                PriceCategories.VLV10000 => "$99.99",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
     }
 
     public class PriceCategoryJsonConverter : JsonConverter<PriceCategory>
