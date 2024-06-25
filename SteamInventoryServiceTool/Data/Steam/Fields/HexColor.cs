@@ -1,18 +1,18 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Drawing;
+using System.Windows.Media;
 
 namespace SteamInventoryServiceTool.Data.Steam.Fields
 {
     public class HexColor
     {
-        public Color Color { get; set; } = Color.White;
+        public Color Color { get; set; } = Color.FromRgb(255, 255, 255);
 
         public HexColor() { }
 
-        public HexColor(int r, int g, int b)
+        public HexColor(byte r, byte g, byte b)
         {
-            Color = Color.FromArgb(r, g, b);
+            Color = Color.FromRgb(r, g, b);
         }
     }
 
@@ -25,7 +25,7 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
             {
                 return new HexColor();
             }
-            var color = ColorTranslator.FromHtml(jsonString);
+            var color = (Color)ColorConverter.ConvertFromString(jsonString);
             return new HexColor(color.R, color.G, color.B);
         }
 
