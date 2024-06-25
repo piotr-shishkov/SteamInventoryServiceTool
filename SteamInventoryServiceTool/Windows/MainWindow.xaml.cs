@@ -17,7 +17,10 @@ namespace SteamInventoryServiceTool.Windows
 
 			CreateItemPreview();
 			SetupToolMenu();
-        }
+
+			var testWindow = new ItemWindow();
+			testWindow.Show();
+		}
 
 		private void CreateItemPreview()
 		{

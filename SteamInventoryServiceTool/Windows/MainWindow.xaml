@@ -33,6 +33,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Frame x:Name="PreviewFrame" Grid.Column="1" Content="Frame" Grid.Row="1"/>
+        <Frame x:Name="PreviewFrame" Grid.Column="1" Content="Preview Here" Grid.Row="1"/>
     </Grid>
 </Window>
