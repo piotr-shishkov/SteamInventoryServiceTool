@@ -1,37 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SteamInventoryServiceTool.Windows.ToolMenuSetup;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SteamInventoryServiceTool.Windows
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
 	{
-		private ItemPreviewPage previewPage;
+		private MainWindowToolMenu _toolMenu;
+		private ItemPreviewPage _previewPage;
 
 		public MainWindow()
 		{
 			InitializeComponent();
+
 			CreateItemPreview();
+			SetupToolMenu();
         }
 
 		private void CreateItemPreview()
 		{
-            previewPage = new ItemPreviewPage();
-            PreviewFrame.Navigate(previewPage);
+            _previewPage = new ItemPreviewPage();
+            this.PreviewFrame.Navigate(_previewPage);
         }
+		
+		private void SetupToolMenu()
+		{
+			_toolMenu = new MainWindowToolMenu(this, ToolMenu);
+		}
     }
 }
