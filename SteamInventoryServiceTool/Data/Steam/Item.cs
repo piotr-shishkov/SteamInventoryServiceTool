@@ -33,13 +33,13 @@ namespace SteamInventoryServiceTool.Data.Steam
         // TODO: price
 
         [JsonProperty("price_category")]
-        public PriceCategory PriceCategory { get; set; }
-        
+        public PriceCategory PriceCategory { get; set; } = new PriceCategory(PriceCategories.None);
+
         [JsonProperty("background_color")]
-        public HexColor BackgroundColor { get; set; }
-        
+        public HexColor BackgroundColor { get; set; } = new HexColor();
+
         [JsonProperty("name_color")]
-        public HexColor NameColor { get; set; }
+        public HexColor NameColor { get; set; } = new HexColor();
         
         [JsonProperty("icon_url")]
         public string IconUrl { get; set; }
@@ -52,9 +52,9 @@ namespace SteamInventoryServiceTool.Data.Steam
         
         [JsonProperty("tradable")]
         public bool Tradable { get; set; }
-        
+
         [JsonProperty("tags")]
-        public Tags Tags { get; set; }
+        public Tags Tags { get; set; } = new Tags();
 
         // TODO: tag_generators
         // TODO: tag_generator_name

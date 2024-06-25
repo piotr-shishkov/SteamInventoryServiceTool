@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamInventoryServiceTool.Windows"
         mc:Ignorable="d"
-        Title="Item" Height="670" Width="900" ResizeMode="CanMinimize" Topmost="True">
+        Title="Item" Height="670" Width="900" ResizeMode="CanMinimize" Icon="/Resources/AppLogo_Small.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="101*"/>
@@ -17,7 +17,7 @@
 
             <ColumnDefinition Width="250*"/>
         </Grid.ColumnDefinitions>
-        <Frame x:Name="PreviewFrame" Grid.Column="1" Content="Preview Here" Grid.RowSpan="2"/>
+        <Frame x:Name="PreviewFrame" Content="Preview Here" Grid.Column="1"/>
         <Label Content="Name" Margin="86,10,158,0" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="16" FontFamily="Arial" Grid.ColumnSpan="1" Height="18"/>
         <Label Content="ID" Margin="10,10,464,0" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="16" FontFamily="Arial" RenderTransformOrigin="0.55,0.503" Grid.ColumnSpan="1" Height="18"/>
         <Label Content="Item Type" Margin="364,10,10,0" VerticalAlignment="Top" Padding="0,0,0,0" FontSize="16" FontFamily="Arial" HorizontalContentAlignment="Right" Height="18"/>
@@ -37,5 +37,6 @@
         <xctk:ColorPicker x:Name="ColorPickerName" Margin="264,187,10,0" FontFamily="Arial" VerticalAlignment="Top" DisplayColorAndName="True" SelectedColor="White" FontSize="18" Height="27"/>
         <TextBox x:Name="IconUrlTextBox" Margin="10,239,263,0" VerticalAlignment="Top" FontFamily="Arial" Padding="0,2,0,2" AutomationProperties.HelpText="Item Name" Grid.ColumnSpan="1" FontSize="18" Height="27"/>
         <TextBox x:Name="IconUrlLargeTextBox" Margin="264,239,10,0" VerticalAlignment="Top" FontFamily="Arial" Padding="0,2,0,2" AutomationProperties.HelpText="Item Name" Grid.ColumnSpan="1" FontSize="18" Height="27"/>
+        <Button x:Name="RefreshButton" Content="Refresh" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="250,8,10,7" FontSize="20" Grid.Column="1" Click="RefreshButton_Click"/>
     </Grid>
 </Window>
