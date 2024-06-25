@@ -20,6 +20,18 @@ namespace SteamInventoryServiceTool.Data.Steam
 		[JsonProperty("promo")]
 		public Promo Promo { get; set; }
 
+		// TODO: drop-start
+		// TODO: exchange
+		// TODO: price
+
+		[JsonProperty("price_category")]
+		public PriceCategory PriceCategory { get; set; }
+		[JsonProperty("background_color")]
+		public HexColor BackgroundColor { get; set; }
+		[JsonProperty("name_color")]
+		public HexColor NameColor{ get; set; }
+
+
 		public Item(int id)
 		{
 			Id = id;
