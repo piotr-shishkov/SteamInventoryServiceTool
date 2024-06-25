@@ -33,7 +33,7 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
                 var tag = split[0];
                 var tagValue = split[1];
 
-                tagsDict.Add(tag, tagValue);                
+                tagsDict.Add(tag, tagValue);
             }
 
             return new Tags()
@@ -65,6 +65,5 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
             }
             writer.WriteValue(jsonString);
         }
-    }
     }
 }
