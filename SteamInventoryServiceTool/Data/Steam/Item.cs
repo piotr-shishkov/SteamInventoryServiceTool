@@ -19,7 +19,10 @@ namespace SteamInventoryServiceTool.Data.Steam
 
         [JsonProperty("description")]
         public string Description { get; set; }
-        
+
+        [JsonProperty("display_type")]
+        public string DisplayType { get; set; }
+
         [JsonProperty("type")]
         public ItemType Type { get; set; }
         
