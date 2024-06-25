@@ -15,8 +15,6 @@ namespace SteamInventoryServiceTool.Windows
         public ItemPreviewPage()
         {
             InitializeComponent();
-
-            SetTestItem();
         }
 
         public async void UpdateItem(Item item)
@@ -45,6 +43,7 @@ namespace SteamInventoryServiceTool.Windows
             return str;
         }
 
+#if DEBUG
         private void SetTestItem()
         {
             UpdateItem(new Item(1)
@@ -67,5 +66,6 @@ namespace SteamInventoryServiceTool.Windows
                 }
             });
         }
+#endif
     }
 }
