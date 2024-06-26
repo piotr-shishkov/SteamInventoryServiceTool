@@ -5,17 +5,19 @@ using System.Linq;
 using Newtonsoft.Json;
 using SteamInventoryServiceTool.Data.Steam;
 
-namespace SteamInventoryServiceTool.Workspace
+namespace SteamInventoryServiceTool.Workspaces
 {
 	[Serializable]
 	public class Workspace
 	{
-		public int AppId { get; private set; }
+		public int AppId { get; set; }
 		public string Name { get; set; }
 		public List<Item> Items { get; set; } = new();
 		
 		[JsonIgnore]
 		public string FilePath { get; set; }
+
+		public event Action Updated;
 
 		public Workspace(int appId, string name = "EmptyWorkspace")
 		{
@@ -56,6 +58,11 @@ namespace SteamInventoryServiceTool.Workspace
 			{
 				WorkspaceFileOperations.SaveWorkspaceWithDialog(this);
 			}
+		}
+
+		public void Update()
+		{
+			Updated?.Invoke();
 		}
 	}
 }

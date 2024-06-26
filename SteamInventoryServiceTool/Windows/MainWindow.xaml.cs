@@ -2,7 +2,7 @@
 using SteamInventoryServiceTool.Windows.ToolMenuSetup;
 using System.Windows;
 using SteamInventoryServiceTool.Utility;
-using SteamInventoryServiceTool.Workspace;
+using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows
 {
@@ -26,9 +26,6 @@ namespace SteamInventoryServiceTool.Windows
 			_workspaceManager.WorkspaceChanged += OnWorkspaceChanged;
 			OnWorkspaceChanged(_workspaceManager.ActiveWorkspace);
 			
-			var testWindow = new ItemWindow();
-			testWindow.ShowAsNewItem();
-			
 			Application.Current.MainWindow.Closed += MainWindowOnClosed;
 		}
 
@@ -48,9 +45,10 @@ namespace SteamInventoryServiceTool.Windows
 			_toolMenu = new MainWindowToolMenu(this, ToolMenu);
 		}
 
-		private void OnWorkspaceChanged(Workspace.Workspace workspace)
+		private void OnWorkspaceChanged(Workspace workspace)
 		{
 			Title = $"{Constants.APP_NAME} | {workspace.Name} | APPID: {workspace.AppId}";
+			_toolMenu.SetWorkspace(_workspaceManager.ActiveWorkspace);
 		}
 	}
 }

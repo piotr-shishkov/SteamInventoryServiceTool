@@ -4,9 +4,8 @@ using System.Windows;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using SteamInventoryServiceTool.Utility;
-using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
-namespace SteamInventoryServiceTool.Workspace;
+namespace SteamInventoryServiceTool.Workspaces;
 
 public static class WorkspaceFileOperations
 {
@@ -66,6 +65,31 @@ public static class WorkspaceFileOperations
         catch (Exception e)
         {
             MessageBox.Show(e.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        return null;
+    }
+
+    public static Workspace OpenWorkspace()
+    {
+        try
+        {
+            var extension = Constants.EXTENSION_WORKSPACE;
+            var dialog = new OpenFileDialog()
+            {
+                Filter = $"Workspace files (*{extension})|*{extension}|All files (*.*)|*.*",
+                DefaultExt = extension,
+                Title = "Open Workspace"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                var filePath = dialog.FileName;
+                return LoadWorkspace(filePath);
+            }
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show($"{e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         return null;
     }

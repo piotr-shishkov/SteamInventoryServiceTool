@@ -1,5 +1,10 @@
-﻿using SteamInventoryServiceTool.Utility;
+﻿using System;
+using System.Windows;
+using SteamInventoryServiceTool.Utility;
 using System.Windows.Controls;
+using System.Windows.Input;
+using SteamInventoryServiceTool.Windows.Dialogs;
+using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
 {
@@ -8,10 +13,13 @@ namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
         private Menu _menuElement;
         private MainWindow _window;
         private ToolMenu _toolMenu;
-        private Workspace.Workspace _activeWorkspace;
 
+        private WorkspaceManager _workspaceManager;
+        private Workspace _activeWorkspace;
+        
         public MainWindowToolMenu(MainWindow window, Menu menuElement)
         {
+            _workspaceManager = WorkspaceManager.Instance;
             _menuElement = menuElement;
             _window = window;
             SetupToolMenu(menuElement);
@@ -20,33 +28,64 @@ namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
         private void SetupToolMenu(Menu menu)
         {
             _toolMenu = new ToolMenu(menu, true);
-            _toolMenu.AddItem("Workspace");
-            _toolMenu.AddItem("Open", "Workspace");
-            _toolMenu.AddItem("New", "Workspace");
-            _toolMenu.AddItem("Create Copy", "Workspace");
+            
+            AddItem("Workspace");
+            AddItem("Edit", "Workspace", EditWorkspace);
             _toolMenu.AddSeparator("Workspace");
-            _toolMenu.AddItem("Save", "Workspace");
-            _toolMenu.AddItem("Import", "Workspace");
-            _toolMenu.AddItem("JSON", "Workspace/Import");
-            _toolMenu.AddItem("Export", "Workspace");
-            _toolMenu.AddItem("JSON", "Workspace/Export");
+            AddItem("Open", "Workspace", OpenWorkspace);
+            AddItem("New", "Workspace", _workspaceManager.NewWorkspace);
+            AddItem("Create Copy", "Workspace");
+            _toolMenu.AddSeparator("Workspace");
+            AddItem("Save", "Workspace", SaveWorkspace);
 
-            _toolMenu.AddItem("Items");
-            _toolMenu.AddItem("New", "Items");
-            _toolMenu.AddItem("Clear All", "Items");
+            AddItem("Items");
+            AddItem("New", "Items");
+            AddItem("Clear All", "Items");
             _toolMenu.AddSeparator("Items");
-            _toolMenu.AddItem("Tags Control", "Items");
+            AddItem("Tags Control", "Items");
+            _toolMenu.AddSeparator("Items");
+            AddItem("Import", "Items");
+            AddItem("JSON", "Items/Import");
+            AddItem("Export", "Items");
+            AddItem("JSON", "Items/Export");
 
-            _toolMenu.AddItem("Help");
-            _toolMenu.AddItem("Steamworks Documentation", "Help");
+            AddItem("Help");
+            AddItem("Steamworks Documentation", "Help");
             _toolMenu.AddSeparator("Help");
-            _toolMenu.AddItem("About S.I.S.T.", "Help");
-            _toolMenu.AddItem("Github Page", "Help");
+            AddItem("About S.I.S.T.", "Help");
+            AddItem("Github Page", "Help");
         }
 
-        public void SetWorkspace(Workspace.Workspace workspace)
+        private void EditWorkspace()
+        {
+            var editWindow = new EditWorkspaceDialogWindow(_activeWorkspace);
+            editWindow.ShowDialog();
+        }
+
+        private MenuItem AddItem(string name, string path = null, Action action = null)
+        {
+            var item = _toolMenu.AddItem(name, path);
+
+            if (action != null)
+            {
+                item.Click += (_, _) => action();
+            }
+            return item;
+        }
+
+        public void SetWorkspace(Workspace workspace)
         {
             _activeWorkspace = workspace;
+        }
+
+        public void OpenWorkspace()
+        {
+            _workspaceManager.OpenWorkspace(WorkspaceFileOperations.OpenWorkspace());
+        }
+
+        public void SaveWorkspace()
+        {
+            _activeWorkspace.Save();
         }
     }
 }

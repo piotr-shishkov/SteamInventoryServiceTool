@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Fields;
-using SteamInventoryServiceTool.Workspace;
+using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows
 {
