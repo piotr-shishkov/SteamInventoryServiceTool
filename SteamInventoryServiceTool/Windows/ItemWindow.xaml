@@ -21,10 +21,10 @@
         <Button x:Name="AddButton" Content="Add Item" Grid.Row="1" Margin="12,20,373,12" Padding="10,1,10,1" FontFamily="Arial" Grid.ColumnSpan="1" FontSize="16"/>
         <Button x:Name="AddNCloseButton" Content="Add &amp; Close" Grid.Row="1" Margin="149,20,210,12" Padding="10,1,10,1" FontFamily="Arial" FontSize="16"/>
         <Button x:Name="CloseButton" Content="Close" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="383,20,12,12" FontSize="16"/>
-        <GroupBox Header="Controls" Grid.Row="1" Margin="5,0,5,5"/>
-        <Button x:Name="RefreshButton" Content="Refresh" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="250,20,12,12" FontSize="16" Grid.Column="1" Click="RefreshButton_Click"/>
-        <GroupBox Header="Preview" Grid.Row="1" Margin="5,0,5,5" Grid.Column="1"/>
-        <GroupBox Header="Item Setup" Margin="5,0,5,0"/>
+        <GroupBox Header="Controls" Grid.Row="1" Margin="5,0,5,5" d:IsLocked="True"/>
+        <Button x:Name="RefreshButton" Content="Refresh" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="250,20,12,12" FontSize="16" Grid.Column="1"/>
+        <GroupBox Header="Preview" Grid.Row="1" Margin="5,0,5,5" Grid.Column="1" d:IsLocked="True"/>
+        <GroupBox Header="Item Setup" Margin="5,0,5,0" d:IsLocked="True"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="24*"/>
@@ -83,6 +83,9 @@
             <CheckBox x:Name="UseDropWindowCheckBox" Content="Use Drop Window" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="17"/>
             <TextBox x:Name="DropPerWindowTextBox" Margin="264,0,12,0" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="19"/>
             <Label Content="Drop Max Per Window" Margin="264,0,7,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Width="246" Grid.Row="18" VerticalContentAlignment="Bottom"/>
+            <Label Content="Tags" Margin="264,36,12,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="10" VerticalContentAlignment="Bottom" Grid.RowSpan="2"/>
+            <TextBox x:Name="TagsTextBox" Margin="264,3,12,5" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" Grid.Row="12" IsEnabled="False"/>
+            <Button x:Name="TagsEditButton" Content="EDIT" Margin="452,3,12,5" Grid.Row="12"/>
         </Grid>
     </Grid>
 </Window>

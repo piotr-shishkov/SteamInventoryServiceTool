@@ -9,7 +9,7 @@ namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
         private Menu _menuElement;
         private MainWindow _window;
         private ToolMenu _toolMenu;
-        private Workspace _activeWorkspace;
+        private Workspace.Workspace _activeWorkspace;
 
         public MainWindowToolMenu(MainWindow window, Menu menuElement)
         {
@@ -45,7 +45,7 @@ namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
             _toolMenu.AddItem("Github Page", "Help");
         }
 
-        public void SetWorkspace(Workspace workspace)
+        public void SetWorkspace(Workspace.Workspace workspace)
         {
             _activeWorkspace = workspace;
         }

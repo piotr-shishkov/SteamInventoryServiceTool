@@ -1,5 +1,8 @@
-﻿using SteamInventoryServiceTool.Windows.ToolMenuSetup;
+﻿using System;
+using SteamInventoryServiceTool.Windows.ToolMenuSetup;
 using System.Windows;
+using SteamInventoryServiceTool.Utility;
+using SteamInventoryServiceTool.Workspace;
 
 namespace SteamInventoryServiceTool.Windows
 {
@@ -10,6 +13,7 @@ namespace SteamInventoryServiceTool.Windows
 	{
 		private MainWindowToolMenu _toolMenu;
 		private ItemPreviewPage _previewPage;
+		private WorkspaceManager _workspaceManager;
 
 		public MainWindow()
 		{
@@ -18,8 +22,19 @@ namespace SteamInventoryServiceTool.Windows
 			CreateItemPreview();
 			SetupToolMenu();
 
+			_workspaceManager = WorkspaceManager.Instance;
+			_workspaceManager.WorkspaceChanged += OnWorkspaceChanged;
+			OnWorkspaceChanged(_workspaceManager.ActiveWorkspace);
+			
 			var testWindow = new ItemWindow();
-			testWindow.Show();
+			testWindow.ShowAsNewItem();
+			
+			Application.Current.MainWindow.Closed += MainWindowOnClosed;
+		}
+
+		private void MainWindowOnClosed(object? sender, EventArgs e)
+		{
+			_workspaceManager.WorkspaceChanged -= OnWorkspaceChanged;
 		}
 
 		private void CreateItemPreview()
@@ -27,10 +42,15 @@ namespace SteamInventoryServiceTool.Windows
             _previewPage = new ItemPreviewPage();
             this.PreviewFrame.Navigate(_previewPage);
         }
-		
+
 		private void SetupToolMenu()
 		{
 			_toolMenu = new MainWindowToolMenu(this, ToolMenu);
 		}
-    }
+
+		private void OnWorkspaceChanged(Workspace.Workspace workspace)
+		{
+			Title = $"{Constants.APP_NAME} | {workspace.Name} | APPID: {workspace.AppId}";
+		}
+	}
 }
