@@ -1,23 +1,53 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using Microsoft.Win32;
 using Newtonsoft.Json;
+using SteamInventoryServiceTool.Utility;
 using MessageBox = Xceed.Wpf.Toolkit.MessageBox;
 
 namespace SteamInventoryServiceTool.Workspace;
 
 public static class WorkspaceFileOperations
 {
-    public static void SaveWorkspace(Workspace workspace, string filePath)
+    public static void SaveWorkspace(Workspace workspace, string filePath = null)
     {
         try
         {
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                workspace.FilePath = filePath;
+            }
             var json = JsonConvert.SerializeObject(workspace, Formatting.Indented);
-            File.WriteAllText(filePath, json);
+            File.WriteAllText(workspace.FilePath, json);
         }
         catch (Exception e)
         {
             MessageBox.Show(e.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    public static void SaveWorkspaceWithDialog(Workspace workspace)
+    {
+        try
+        {
+            var extension = Constants.EXTENSION_WORKSPACE;
+            var dialog = new SaveFileDialog
+            {
+                Filter = $"Workspace files (*{extension})|*{extension}|All files (*.*)|*.*",
+                DefaultExt = extension,
+                Title = "Save Workspace"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                var filePath = dialog.FileName;
+                SaveWorkspace(workspace, filePath);
+            }
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show($"{e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -29,7 +59,9 @@ public static class WorkspaceFileOperations
                 throw new FileNotFoundException("File not found", filePath);
 
             var json = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<Workspace>(json);
+            var workspace = JsonConvert.DeserializeObject<Workspace>(json);
+            workspace.FilePath = filePath;
+            return workspace;
         }
         catch (Exception e)
         {

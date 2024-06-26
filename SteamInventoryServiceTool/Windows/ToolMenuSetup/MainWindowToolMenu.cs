@@ -1,5 +1,4 @@
-﻿using SteamInventoryServiceTool.Data;
-using SteamInventoryServiceTool.Utility;
+﻿using SteamInventoryServiceTool.Utility;
 using System.Windows.Controls;
 
 namespace SteamInventoryServiceTool.Windows.ToolMenuSetup

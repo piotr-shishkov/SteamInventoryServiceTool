@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using SteamInventoryServiceTool.Data.Steam;
 
 namespace SteamInventoryServiceTool.Workspace
@@ -11,6 +13,9 @@ namespace SteamInventoryServiceTool.Workspace
 		public int AppId { get; private set; }
 		public string Name { get; set; }
 		public List<Item> Items { get; set; } = new();
+		
+		[JsonIgnore]
+		public string FilePath { get; set; }
 
 		public Workspace(int appId, string name = "EmptyWorkspace")
 		{
@@ -20,7 +25,6 @@ namespace SteamInventoryServiceTool.Workspace
 
 		public void AddItem(Item item)
 		{
-			
 		}
 
 		public int GetNextItemId()
@@ -40,6 +44,18 @@ namespace SteamInventoryServiceTool.Workspace
 
 			// If all IDs are sequential, return the next ID
 			return ids.Count + 1;
+		}
+
+		public void Save()
+		{
+			if (!string.IsNullOrEmpty(FilePath) && File.Exists(FilePath))
+			{
+				WorkspaceFileOperations.SaveWorkspace(this);
+			}
+			else
+			{
+				WorkspaceFileOperations.SaveWorkspaceWithDialog(this);
+			}
 		}
 	}
 }
