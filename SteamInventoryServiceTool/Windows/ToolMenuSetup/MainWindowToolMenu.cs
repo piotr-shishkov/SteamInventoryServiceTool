@@ -34,12 +34,12 @@ namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
             _toolMenu.AddSeparator("Workspace");
             AddItem("Open", "Workspace", OpenWorkspace);
             AddItem("New", "Workspace", _workspaceManager.NewWorkspace);
-            AddItem("Create Copy", "Workspace");
+            AddItem("Duplicate", "Workspace");
             _toolMenu.AddSeparator("Workspace");
             AddItem("Save", "Workspace", SaveWorkspace);
 
             AddItem("Items");
-            AddItem("New", "Items");
+            AddItem("New", "Items", AddNewItem);
             AddItem("Clear All", "Items");
             _toolMenu.AddSeparator("Items");
             AddItem("Tags Control", "Items");
@@ -73,6 +73,8 @@ namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
             return item;
         }
 
+        #region Workspace Controls
+        
         public void SetWorkspace(Workspace workspace)
         {
             _activeWorkspace = workspace;
@@ -87,5 +89,17 @@ namespace SteamInventoryServiceTool.Windows.ToolMenuSetup
         {
             _activeWorkspace.Save();
         }
+        
+        #endregion
+
+        #region Item Controls
+
+        private void AddNewItem()
+        {
+            var itemWindow = new ItemWindow();
+            itemWindow.ShowAsNewItem();
+        }
+
+        #endregion
     }
 }
