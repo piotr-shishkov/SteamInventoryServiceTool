@@ -36,6 +36,7 @@ public class WorkspaceManager : Singleton<WorkspaceManager>
         _activeWorkspace = workspace;
         _activeWorkspace.Updated += OnActiveWorkspaceUpdated;
         WorkspaceChanged?.Invoke(_activeWorkspace);
+        _activeWorkspace.Save();
     }
 
     private void OnActiveWorkspaceUpdated()

@@ -20,9 +20,12 @@ namespace SteamInventoryServiceTool.Windows
     {
         private ItemPreviewPage _previewPage;
         private ItemOpenType _openType;
+        private WorkspaceManager _workspaceManager;
 
         public ItemWindow()
         {
+            _workspaceManager = WorkspaceManager.Instance;
+            
             InitializeComponent();
             SetupElements();
             CreateItemPreview();
@@ -52,16 +55,17 @@ namespace SteamInventoryServiceTool.Windows
         public void ShowAsNewItem()
         {
             SetOpenType(ItemOpenType.New);
+            var item = GetItem();
+            item.Id = _workspaceManager.ActiveWorkspace.GetNextItemId();
+            FillItem(item);
             ShowDialog();
-            var itemId = new Item(WorkspaceManager.Instance.ActiveWorkspace.GetNextItemId());
-            FillItem(itemId);
         }
 
         public void ShowAsEditItem(Item item)
         {
             SetOpenType(ItemOpenType.Edit);
-            ShowDialog();
             FillItem(item);
+            ShowDialog();
         }
 
         private void SetOpenType(ItemOpenType type)
@@ -91,12 +95,16 @@ namespace SteamInventoryServiceTool.Windows
 
         private void AddButtonOnClick(object sender, RoutedEventArgs e)
         {
-            
+            AddCurrentItem();
+            var item = GetItem();
+            item.Id = _workspaceManager.ActiveWorkspace.GetNextItemId();
+            FillItem(item);
         }
 
         private void AddNCloseButtonOnClick(object sender, RoutedEventArgs e)
         {
-            
+            AddCurrentItem();
+            Close();
         }
 
         private void CloseButtonOnClick(object sender, RoutedEventArgs e)
@@ -109,7 +117,11 @@ namespace SteamInventoryServiceTool.Windows
             UpdatePreview();
         }
 
-        //private void 
+        private void AddCurrentItem()
+        {
+            var item = GetItem();
+            _workspaceManager.ActiveWorkspace.AddItem(item);
+        }
 
         #region ItemControl
         private void FillItem(Item item)
