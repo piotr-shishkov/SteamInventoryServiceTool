@@ -14,7 +14,12 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
 
         public override string ToString()
         {
-            return Category switch
+            return PriceToString(Category);
+        }
+
+        public static string PriceToString(PriceCategories value)
+        {
+            return value switch
             {
                 PriceCategories.None => "",
                 PriceCategories.VLV25 => "$0.25",

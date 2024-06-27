@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Documents;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Fields;
 using SteamInventoryServiceTool.Workspaces;
@@ -22,7 +24,23 @@ namespace SteamInventoryServiceTool.Windows
         public ItemWindow()
         {
             InitializeComponent();
+            SetupElements();
             CreateItemPreview();
+        }
+
+        private void SetupElements()
+        {
+            var types = Enum.GetNames(typeof(ItemType));
+            TypeComboBox.ItemsSource = types;
+            TypeComboBox.SelectedIndex = 0;
+            
+            var prices = Enum.GetNames(typeof(PriceCategories));
+            for (var i = 0; i < prices.Length; i++)
+            {
+                prices[i] += $" => {PriceCategory.PriceToString((PriceCategories)i)}";
+            }
+            PriceComboBox.ItemsSource = prices;
+            PriceComboBox.SelectedIndex = 0;
         }
 
         private void CreateItemPreview()
@@ -98,7 +116,7 @@ namespace SteamInventoryServiceTool.Windows
         {
             IdTextBox.Text = item.Id.ToString();
             NameTextBox.Text = item.Name;
-            // itemtype
+            TypeComboBox.SelectedIndex = (int)item.Type;
             DescriptionTextBox.Text = item.Description;
             DisplayTypeTextBox.Text = item.DisplayType;
             MarketableCheckBox.IsChecked = item.Marketable;
@@ -107,7 +125,7 @@ namespace SteamInventoryServiceTool.Windows
             ColorPickerName.SelectedColor = item.NameColor.Color;
             IconUrlTextBox.Text = item.IconUrl;
             IconUrlLargeTextBox.Text = item.IconUrlLarge;
-            // pricecombobox
+            PriceComboBox.SelectedIndex = (int)item.PriceCategory.Category;
             // TagsTextBox.Text
             GameOnlyCheckBox.IsChecked = item.GameOnly;
             HiddenCheckBox.IsChecked = item.Hidden;
@@ -129,7 +147,7 @@ namespace SteamInventoryServiceTool.Windows
             var item = new Item(id)
             {
                 Name = NameTextBox.Text,
-                // itemtype
+                Type = (ItemType)TypeComboBox.SelectedIndex,
                 Description = DescriptionTextBox.Text,
                 DisplayType = DisplayTypeTextBox.Text,
                 Marketable = MarketableCheckBox.IsChecked!.Value,
@@ -138,7 +156,7 @@ namespace SteamInventoryServiceTool.Windows
                 NameColor = new HexColor(textColor.R, textColor.G, textColor.B),
                 IconUrl = IconUrlTextBox.Text,
                 IconUrlLarge = IconUrlLargeTextBox.Text,
-                // price
+                PriceCategory = new PriceCategory((PriceCategories)PriceComboBox.SelectedIndex),
                 // tags
                 GameOnly = GameOnlyCheckBox.IsChecked!.Value,
                 Hidden = HiddenCheckBox.IsChecked!.Value,
@@ -147,10 +165,19 @@ namespace SteamInventoryServiceTool.Windows
                 UseBundlePrice = UseBundlePriceCheckBox.IsChecked!.Value,
                 AutoStack = AutoStackCheckBox.IsChecked!.Value,
                 UseDropLimit = UseDropLimitCheckBox.IsChecked!.Value,
-                DropInterval = int.Parse(DropIntervalTextBox.Text),
                 UseDropWindow = UseDropWindowCheckBox.IsChecked!.Value,
-                DropMaxPerWindow = int.Parse(DropPerWindowTextBox.Text)
             };
+            
+            if(int.TryParse(DropIntervalTextBox.Text, out var dropIntervalValue))
+            {
+                item.DropInterval = dropIntervalValue;
+            }
+
+            if (int.TryParse(DropPerWindowTextBox.Text, out var dropPerWindowValue))
+            {
+                item.DropMaxPerWindow = dropPerWindowValue;
+            }
+            
             return item;
         }
 

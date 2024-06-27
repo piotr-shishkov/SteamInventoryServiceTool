@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamInventoryServiceTool.Windows"
         mc:Ignorable="d"
-        Title="Item" Height="670" Width="900" ResizeMode="CanMinimize" Icon="/Resources/AppLogo_Small.png">
+        Title="Item" Height="690" Width="900" ResizeMode="CanMinimize" Icon="/Resources/AppLogo_Small.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="589*"/>
@@ -17,14 +17,15 @@
 
             <ColumnDefinition Width="250*"/>
         </Grid.ColumnDefinitions>
-        <Frame x:Name="PreviewFrame" Content="Preview Here" Grid.Column="1" Margin="10,10,10,8"/>
+        <Frame x:Name="PreviewFrame" Content="Preview Here" Grid.Column="1" Margin="25,50,25,47"/>
         <Button x:Name="AddButton" Content="Add Item" Grid.Row="1" Margin="12,20,373,12" Padding="10,1,10,1" FontFamily="Arial" Grid.ColumnSpan="1" FontSize="16"/>
         <Button x:Name="AddNCloseButton" Content="Add &amp; Close" Grid.Row="1" Margin="149,20,210,12" Padding="10,1,10,1" FontFamily="Arial" FontSize="16"/>
         <Button x:Name="CloseButton" Content="Close" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="383,20,12,12" FontSize="16"/>
-        <GroupBox Header="Controls" Grid.Row="1" Margin="5,0,5,5" d:IsLocked="True"/>
         <Button x:Name="RefreshButton" Content="Refresh" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="250,20,12,12" FontSize="16" Grid.Column="1"/>
-        <GroupBox Header="Preview" Grid.Row="1" Margin="5,0,5,5" Grid.Column="1" d:IsLocked="True"/>
+        <GroupBox Header="Controls" Grid.Row="1" Margin="5,0,5,5" d:IsLocked="True"/>
+        <GroupBox Header="Preview" Grid.Row="1" Margin="5,0,5,5" Grid.Column="1"/>
         <GroupBox Header="Item Setup" Margin="5,0,5,0" d:IsLocked="True"/>
+        <GroupBox Header="Preview Window" Margin="5,0,5,5" Grid.Column="1"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="24*"/>
@@ -40,6 +41,8 @@
                 <RowDefinition Height="36*"/>
                 <RowDefinition Height="18*"/>
                 <RowDefinition Height="36*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="18*"/>
                 <RowDefinition Height="36*"/>
                 <RowDefinition Height="24*"/>
                 <RowDefinition Height="24*"/>
@@ -60,7 +63,7 @@
             <Label Content="Display Type" Margin="12,0,264,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="5" VerticalContentAlignment="Bottom"/>
             <TextBox x:Name="NameTextBox" Margin="86,3,158,5" FontFamily="Arial" Padding="0,2,0,2" AutomationProperties.HelpText="Item Name" Grid.ColumnSpan="1" FontSize="18" Grid.Row="2"/>
             <TextBox x:Name="IdTextBox" Margin="12,3,436,5" Text="0" IsEnabled="False" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="18" Grid.Row="2"/>
-            <ComboBox x:Name="TypeComboBox" Margin="364,3,12,5" FontFamily="Arial" Padding="6,3,5,3" MaxDropDownHeight="300" FontSize="18" Grid.Row="2"/>
+            <ComboBox x:Name="TypeComboBox" Margin="364,3,12,5" FontFamily="Arial" Padding="6,3,5,3" MaxDropDownHeight="300" FontSize="16" Grid.Row="2"/>
             <TextBox x:Name="DescriptionTextBox" Margin="12,3,12,5" FontFamily="Arial" Padding="0,2,0,2" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" FontSize="18" Grid.Row="4"/>
             <xctk:ColorPicker x:Name="ColorPickerBackground" Margin="12,3,263,5" FontFamily="Arial" DisplayColorAndName="True" SelectedColor="White" Grid.ColumnSpan="1" FontSize="16" Grid.Row="8"/>
             <xctk:ColorPicker x:Name="ColorPickerName" Margin="264,3,12,5" FontFamily="Arial" DisplayColorAndName="True" SelectedColor="White" FontSize="16" Grid.Row="8"/>
@@ -69,23 +72,29 @@
             <TextBox x:Name="DisplayTypeTextBox" Margin="12,3,263,5" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" Grid.Row="6"/>
             <CheckBox x:Name="MarketableCheckBox" Content="Marketable" Margin="264,3,134,5" FontSize="16" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="6"/>
             <CheckBox x:Name="TradableCheckBox" Content="Tradable" Margin="388,3,12,5" FontSize="16" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="6"/>
-            <ComboBox x:Name="PriceComboBox" Margin="12,3,263,5" FontFamily="Arial" Padding="6,3,5,3" MaxDropDownHeight="300" FontSize="18" Grid.Row="12"/>
+            <ComboBox x:Name="PriceComboBox" Margin="12,3,263,5" FontFamily="Arial" Padding="6,3,5,3" MaxDropDownHeight="300" FontSize="16" Grid.Row="12"/>
             <Label Content="Price Category" Margin="12,0,263,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="11" VerticalContentAlignment="Bottom"/>
-            <CheckBox x:Name="GameOnlyCheckBox" Content="Game Only" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="14"/>
-            <CheckBox x:Name="HiddenCheckBox" Content="Hidden" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="15"/>
-            <CheckBox x:Name="StoreHiddenCheckBox" Content="Store Hidden" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="16"/>
-            <CheckBox x:Name="GrantedManuallyCheckBox" Content="Granted Manually" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="17"/>
-            <CheckBox x:Name="UseBundlePriceCheckBox" Content="Use Bundle Price" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" VerticalAlignment="Center" Grid.Row="18"/>
-            <CheckBox x:Name="AutoStackCheckBox" Content="Auto Stack" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" Grid.Row="19"/>
-            <CheckBox x:Name="UseDropLimitCheckBox" Content="Use Drop Limit" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="14"/>
-            <TextBox x:Name="DropIntervalTextBox" Margin="264,0,12,0" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="16"/>
-            <Label Content="Drop Interval" Margin="264,0,12,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="15" VerticalContentAlignment="Bottom"/>
-            <CheckBox x:Name="UseDropWindowCheckBox" Content="Use Drop Window" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="17"/>
-            <TextBox x:Name="DropPerWindowTextBox" Margin="264,0,12,0" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="19"/>
-            <Label Content="Drop Max Per Window" Margin="264,0,7,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Width="246" Grid.Row="18" VerticalContentAlignment="Bottom"/>
+            <CheckBox x:Name="GameOnlyCheckBox" Content="Game Only" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="16"/>
+            <CheckBox x:Name="HiddenCheckBox" Content="Hidden" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="17"/>
+            <CheckBox x:Name="StoreHiddenCheckBox" Content="Store Hidden" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="18"/>
+            <CheckBox x:Name="GrantedManuallyCheckBox" Content="Granted Manually" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="19"/>
+            <CheckBox x:Name="UseBundlePriceCheckBox" Content="Use Bundle Price" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" VerticalAlignment="Center" Grid.Row="20"/>
+            <CheckBox x:Name="AutoStackCheckBox" Content="Auto Stack" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" Grid.Row="21"/>
+            <CheckBox x:Name="UseDropLimitCheckBox" Content="Use Drop Limit" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="16"/>
+            <TextBox x:Name="DropIntervalTextBox" Margin="264,0,12,0" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="18"/>
+            <Label Content="Drop Interval" Margin="264,0,12,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="17" VerticalContentAlignment="Bottom"/>
+            <CheckBox x:Name="UseDropWindowCheckBox" Content="Use Drop Window" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="19"/>
+            <TextBox x:Name="DropPerWindowTextBox" Margin="264,0,12,0" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="21"/>
+            <Label Content="Drop Max Per Window" Margin="264,0,7,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Width="246" Grid.Row="20" VerticalContentAlignment="Bottom"/>
             <Label Content="Tags" Margin="264,36,12,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="10" VerticalContentAlignment="Bottom" Grid.RowSpan="2"/>
             <TextBox x:Name="TagsTextBox" Margin="264,3,12,5" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" Grid.Row="12" IsEnabled="False"/>
             <Button x:Name="TagsEditButton" Content="EDIT" Margin="452,3,12,5" Grid.Row="12"/>
+            <Label Content="Bundle Setup" Margin="12,0,263,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="14" VerticalContentAlignment="Bottom"/>
+            <Label Content="Promo Setup" Margin="264,0,12,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="14" VerticalContentAlignment="Bottom"/>
+            <TextBox x:Name="BundleTextBox" Margin="12,3,264,5" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" Grid.Row="15" IsEnabled="False"/>
+            <TextBox x:Name="PromoTextBox" Margin="264,3,12,5" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" Grid.Row="15" IsEnabled="False"/>
+            <Button x:Name="PromoEditButton" Content="EDIT" Margin="452,3,12,5" Grid.Row="15"/>
+            <Button x:Name="BundleEditButton" Content="EDIT" Margin="200,3,264,5" Grid.Row="15"/>
         </Grid>
     </Grid>
 </Window>
