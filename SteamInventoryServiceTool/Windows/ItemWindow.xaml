@@ -22,6 +22,7 @@
         <Button x:Name="AddNCloseButton" Content="Add &amp; Close" Grid.Row="1" Margin="149,20,210,12" Padding="10,1,10,1" FontFamily="Arial" FontSize="16"/>
         <Button x:Name="CloseButton" Content="Close" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="383,20,12,12" FontSize="16"/>
         <Button x:Name="RefreshButton" Content="Refresh" Grid.Row="1" Padding="10,1,10,1" FontFamily="Arial" Margin="250,20,12,12" FontSize="16" Grid.Column="1"/>
+        <CheckBox x:Name="AutoRefreshCheckBox" Content="Auto-Refresh" FontSize="16" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Column="1" Margin="17,20,138,12" Grid.Row="1"/>
         <GroupBox Header="Controls" Grid.Row="1" Margin="5,0,5,5" d:IsLocked="True"/>
         <GroupBox Header="Preview" Grid.Row="1" Margin="5,0,5,5" Grid.Column="1"/>
         <GroupBox Header="Item Setup" Margin="5,0,5,0" d:IsLocked="True"/>

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Threading;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Fields;
 using SteamInventoryServiceTool.Workspaces;
@@ -21,6 +24,7 @@ public partial class ItemWindow : Window
     private ItemPreviewPage _previewPage;
     private ItemOpenType _openType;
     private WorkspaceManager _workspaceManager;
+    private DispatcherTimer _disptacherTimer;
 
     public ItemWindow()
     {
@@ -44,7 +48,17 @@ public partial class ItemWindow : Window
         }
         PriceComboBox.ItemsSource = prices;
         PriceComboBox.SelectedIndex = 0;
+
+        AutoRefreshCheckBox.IsChecked = true;
+        AutoRefreshCheckBox.Click += AutoRefreshClicked;
+
+        _disptacherTimer = new DispatcherTimer();
+        _disptacherTimer.Tick += OnTimerTick;
+        _disptacherTimer.Interval = TimeSpan.FromMilliseconds(500);
+        
+        ToggleAutoRefresh();
     }
+
 
     private void CreateItemPreview()
     {
@@ -195,6 +209,32 @@ public partial class ItemWindow : Window
         }
             
         return item;
+    }
+    
+    private void AutoRefreshClicked(object sender, RoutedEventArgs e)
+    {
+        ToggleAutoRefresh();
+    }
+
+    private async void ToggleAutoRefresh()
+    {
+        var autoRefreshEnabled = AutoRefreshCheckBox.IsChecked.Value;
+
+        RefreshButton.IsEnabled = !autoRefreshEnabled;
+        if (autoRefreshEnabled)
+        {   
+            _disptacherTimer.Start();
+        }
+        else
+        {
+            _disptacherTimer.Stop();
+        }
+    }
+    
+    
+    private void OnTimerTick(object? sender, EventArgs e)
+    {
+        UpdatePreview();
     }
 
     private void UpdatePreview()
