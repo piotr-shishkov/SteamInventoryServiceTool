@@ -29,6 +29,7 @@ namespace SteamInventoryServiceTool.Workspaces
 		{
 			Items.Add(item);
 			Update();
+			Save();
 		}
 
 		public int GetNextItemId()
