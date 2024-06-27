@@ -25,6 +25,8 @@ public class Workspace
 		Name = name;
 	}
 
+	#region Item Control
+	
 	public void AddItem(Item item)
 	{
 		var existingItem = Items.FirstOrDefault(x => x.Id == item.Id);
@@ -33,6 +35,7 @@ public class Workspace
 			Items.Remove(existingItem);
 		}
 		Items.Add(item);
+		SortItems();
 		Update();
 		Save();
 	}
@@ -40,9 +43,17 @@ public class Workspace
 	public void RemoveItem(Item item)
 	{
 		Items.Remove(item);
+		SortItems();
 		Update();
 		Save();
 	}
+
+	private void SortItems()
+	{
+		Items.Sort((x, y) => x.Id.CompareTo(y.Id));
+	}
+	
+	#endregion
 
 	public int GetNextItemId()
 	{
