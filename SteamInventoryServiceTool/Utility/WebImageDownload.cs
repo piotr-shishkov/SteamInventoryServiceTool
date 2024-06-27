@@ -9,6 +9,9 @@ public static class WebImageDownload
 {
     public static async Task<BitmapImage> Get(string imageUrl)
     {
+        if (string.IsNullOrWhiteSpace(imageUrl))
+            return null;
+        
         using (var client = new HttpClient())
         {
             try
