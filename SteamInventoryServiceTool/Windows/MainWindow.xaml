@@ -26,7 +26,7 @@
                 <MenuItem Header="Edit Tags"/>
             </MenuItem>
         </Menu>
-        <ListView x:Name="ItemsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=25}">
+        <ListView x:Name="ItemsListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=25}" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

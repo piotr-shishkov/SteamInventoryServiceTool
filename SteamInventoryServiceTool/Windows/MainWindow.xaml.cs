@@ -1,6 +1,8 @@
 ﻿using System;
 using SteamInventoryServiceTool.Windows.ToolMenuSetup;
 using System.Windows;
+using System.Windows.Controls;
+using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Utility;
 using SteamInventoryServiceTool.Windows.ListViews;
 using SteamInventoryServiceTool.Workspaces;
@@ -24,11 +26,12 @@ public partial class MainWindow : Window
 		CreateItemPreview();
 		SetupToolMenu();
 		_itemListHandler = new ItemListViewHandler(ItemsListView);
+		ItemsListView.SelectionChanged += OnItemListSelectionChanged;
 
 		_workspaceManager = WorkspaceManager.Instance;
 		_workspaceManager.WorkspaceChanged += OnWorkspaceChanged;
 		OnWorkspaceChanged(_workspaceManager.ActiveWorkspace);
-			
+
 		Application.Current.MainWindow.Closed += MainWindowOnClosed;
 	}
 
@@ -46,6 +49,14 @@ public partial class MainWindow : Window
 	private void SetupToolMenu()
 	{
 		_toolMenu = new MainWindowToolMenu(this, ToolMenu);
+	}
+
+	private void OnItemListSelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		if (sender is ListView listView && listView.SelectedItem is Item item)
+		{
+			_previewPage.UpdateItem(item);
+		}
 	}
 
 	private void OnWorkspaceChanged(Workspace workspace)
