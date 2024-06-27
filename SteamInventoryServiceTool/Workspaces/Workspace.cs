@@ -27,7 +27,19 @@ public class Workspace
 
 	public void AddItem(Item item)
 	{
+		var existingItem = Items.FirstOrDefault(x => x.Id == item.Id);
+		if (existingItem != null)
+		{
+			Items.Remove(existingItem);
+		}
 		Items.Add(item);
+		Update();
+		Save();
+	}
+
+	public void RemoveItem(Item item)
+	{
+		Items.Remove(item);
 		Update();
 		Save();
 	}
