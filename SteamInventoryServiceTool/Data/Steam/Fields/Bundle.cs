@@ -3,17 +3,17 @@ using SteamInventoryServiceTool.Data.Steam.Misc;
 using System;
 using System.Collections.Generic;
 
-namespace SteamInventoryServiceTool.Data.Steam.Fields
-{
-	public class Bundle
-	{
-		public Dictionary<Item, ItemCount> Items { get; set; } = new Dictionary<Item, ItemCount>();
-	}
+namespace SteamInventoryServiceTool.Data.Steam.Fields;
 
-	public class BundleJsonConverter : JsonConverter<Bundle>
+public class Bundle
+{
+	public Dictionary<Item, ItemCount> Items { get; set; } = new Dictionary<Item, ItemCount>();
+}
+
+public class BundleJsonConverter : JsonConverter<Bundle>
+{
+	public override Bundle? ReadJson(JsonReader reader, Type objectType, Bundle? existingValue, bool hasExistingValue, JsonSerializer serializer)
 	{
-		public override Bundle? ReadJson(JsonReader reader, Type objectType, Bundle? existingValue, bool hasExistingValue, JsonSerializer serializer)
-		{
 			var jsonString = reader.Value as string;
 			if (jsonString == null)
 			{
@@ -42,8 +42,8 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
 			};
 		}
 
-		public override void WriteJson(JsonWriter writer, Bundle? value, JsonSerializer serializer)
-		{
+	public override void WriteJson(JsonWriter writer, Bundle? value, JsonSerializer serializer)
+	{
 			var jsonString = string.Empty;
 			if(value == null)
 			{
@@ -54,7 +54,7 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
 			var i = 0;
 			foreach (var (item, count) in value.Items)
 			{
-				// Appending item ID (itemdefid) first				
+				// Appending item ID (itemdefid) first
 				jsonString += item.Id;
 
 				// Now same, for future purposes
@@ -75,5 +75,4 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields
 			}
 			writer.WriteValue(jsonString);
 		}
-	}
 }

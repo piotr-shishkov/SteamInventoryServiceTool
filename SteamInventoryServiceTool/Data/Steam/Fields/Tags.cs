@@ -2,64 +2,63 @@
 using System;
 using System.Collections.Generic;
 
-namespace SteamInventoryServiceTool.Data.Steam.Fields
+namespace SteamInventoryServiceTool.Data.Steam.Fields;
+
+public class Tags
 {
-    public class Tags
+    public Dictionary<string, string> TagsDict { get; set; } = new Dictionary<string, string>();
+}
+
+public class TagsJsonConverter : JsonConverter<Tags>
+{
+    public override Tags? ReadJson(JsonReader reader, Type objectType, Tags? existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
-        public Dictionary<string, string> TagsDict { get; set; } = new Dictionary<string, string>();
+        var jsonString = reader.Value as string;
+        if (jsonString == null)
+        {
+            return new Tags();
+        }
+
+        var tagsDict = new Dictionary<string, string>();
+        // Separating all tags
+        var separatedTags = jsonString.Split(';');
+        foreach (var tagPair in separatedTags)
+        {
+            // Separate single item by item and its count
+            var split = tagPair.Split(':');
+            var tag = split[0];
+            var tagValue = split[1];
+
+            tagsDict.Add(tag, tagValue);
+        }
+
+        return new Tags()
+        {
+            TagsDict = tagsDict
+        };
     }
 
-    public class TagsJsonConverter : JsonConverter<Tags>
+    public override void WriteJson(JsonWriter writer, Tags? value, JsonSerializer serializer)
     {
-        public override Tags? ReadJson(JsonReader reader, Type objectType, Tags? existingValue, bool hasExistingValue, JsonSerializer serializer)
+        var jsonString = string.Empty;
+        if (value == null)
         {
-            var jsonString = reader.Value as string;
-            if (jsonString == null)
-            {
-                return new Tags();
-            }
-
-            var tagsDict = new Dictionary<string, string>();
-            // Separating all tags
-            var separatedTags = jsonString.Split(';');
-            foreach (var tagPair in separatedTags)
-            {
-                // Separate single item by item and its count
-                var split = tagPair.Split(':');
-                var tag = split[0];
-                var tagValue = split[1];
-
-                tagsDict.Add(tag, tagValue);
-            }
-
-            return new Tags()
-            {
-                TagsDict = tagsDict
-            };
+            writer.WriteNull();
+            return;
         }
 
-        public override void WriteJson(JsonWriter writer, Tags? value, JsonSerializer serializer)
+        var i = 0;
+        foreach (var (tag, tagValue) in value.TagsDict)
         {
-            var jsonString = string.Empty;
-            if (value == null)
-            {
-                writer.WriteNull();
-                return;
-            }
+            jsonString += tag;
+            jsonString += $":{tagValue}";
 
-            var i = 0;
-            foreach (var (tag, tagValue) in value.TagsDict)
+            // Check if not last item
+            if (i++ < value.TagsDict.Count - 1)
             {
-                jsonString += tag;
-                jsonString += $":{tagValue}";
-
-                // Check if not last item
-                if (i++ < value.TagsDict.Count - 1)
-                {
-                    jsonString += ";";
-                }
+                jsonString += ";";
             }
-            writer.WriteValue(jsonString);
         }
+        writer.WriteValue(jsonString);
     }
 }

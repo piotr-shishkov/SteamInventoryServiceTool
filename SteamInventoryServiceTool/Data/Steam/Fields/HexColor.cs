@@ -2,43 +2,42 @@
 using System;
 using System.Windows.Media;
 
-namespace SteamInventoryServiceTool.Data.Steam.Fields
+namespace SteamInventoryServiceTool.Data.Steam.Fields;
+
+public class HexColor
 {
-    public class HexColor
+    public Color Color { get; set; } = Color.FromRgb(255, 255, 255);
+
+    public HexColor() { }
+
+    public HexColor(byte r, byte g, byte b)
     {
-        public Color Color { get; set; } = Color.FromRgb(255, 255, 255);
+        Color = Color.FromRgb(r, g, b);
+    }
+}
 
-        public HexColor() { }
-
-        public HexColor(byte r, byte g, byte b)
+public class HexColorJsonConverter : JsonConverter<HexColor>
+{
+    public override HexColor? ReadJson(JsonReader reader, Type objectType, HexColor? existingValue, bool hasExistingValue, JsonSerializer serializer)
+    {
+        var jsonString = reader.Value as string;
+        if (jsonString == null)
         {
-            Color = Color.FromRgb(r, g, b);
+            return new HexColor();
         }
+        var color = (Color)ColorConverter.ConvertFromString(jsonString);
+        return new HexColor(color.R, color.G, color.B);
     }
 
-    public class HexColorJsonConverter : JsonConverter<HexColor>
+    public override void WriteJson(JsonWriter writer, HexColor? value, JsonSerializer serializer)
     {
-        public override HexColor? ReadJson(JsonReader reader, Type objectType, HexColor? existingValue, bool hasExistingValue, JsonSerializer serializer)
+        if (value == null)
         {
-            var jsonString = reader.Value as string;
-            if (jsonString == null)
-            {
-                return new HexColor();
-            }
-            var color = (Color)ColorConverter.ConvertFromString(jsonString);
-            return new HexColor(color.R, color.G, color.B);
+            writer.WriteNull();
+            return;
         }
-
-        public override void WriteJson(JsonWriter writer, HexColor? value, JsonSerializer serializer)
-        {
-            if (value == null)
-            {
-                writer.WriteNull();
-                return;
-            }
-            var color = value.Color;
-            var hexString = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
-            writer.WriteValue(hexString);
-        }
+        var color = value.Color;
+        var hexString = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        writer.WriteValue(hexString);
     }
 }
