@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using SteamInventoryServiceTool.Data.Steam.Fields;
 using SteamInventoryServiceTool.Utility;
 
 namespace SteamInventoryServiceTool.Workspaces;
@@ -17,7 +19,8 @@ public static class WorkspaceFileOperations
             {
                 workspace.FilePath = filePath;
             }
-            var json = JsonConvert.SerializeObject(workspace, Formatting.Indented);
+            
+            var json = JsonConvert.SerializeObject(workspace, GetJsonSettings());
             File.WriteAllText(workspace.FilePath, json);
         }
         catch (Exception e)
@@ -58,7 +61,7 @@ public static class WorkspaceFileOperations
                 throw new FileNotFoundException("File not found", filePath);
 
             var json = File.ReadAllText(filePath);
-            var workspace = JsonConvert.DeserializeObject<Workspace>(json);
+            var workspace = JsonConvert.DeserializeObject<Workspace>(json, GetJsonSettings());
             workspace.FilePath = filePath;
             return workspace;
         }
@@ -92,5 +95,20 @@ public static class WorkspaceFileOperations
             MessageBox.Show($"{e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         return null;
+    }
+
+    private static JsonSerializerSettings GetJsonSettings()
+    {
+        var settings = new JsonSerializerSettings();
+        settings.Formatting = Formatting.Indented;
+        settings.Converters = new List<JsonConverter>()
+        {
+            new BundleJsonConverter(),
+            new HexColorJsonConverter(),
+            new PriceCategoryJsonConverter(),
+            new PromoJsonConverter(),
+            new TagsJsonConverter()
+        };
+        return settings;
     }
 }
