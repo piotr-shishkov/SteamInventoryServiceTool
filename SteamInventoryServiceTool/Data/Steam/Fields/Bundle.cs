@@ -8,71 +8,77 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields;
 public class Bundle
 {
 	public Dictionary<Item, ItemCount> Items { get; set; } = new Dictionary<Item, ItemCount>();
+
+	public Bundle() { }
+
+	public Bundle(string sourceString)
+	{
+		if (string.IsNullOrWhiteSpace(sourceString))
+		{
+			return;
+		}
+
+		// Separating all items
+		var separatedItems = sourceString.Split(';');
+		foreach (var value in separatedItems)
+		{
+			// Separate single item by item and its count
+			var split = value.Split('x');
+			var itemId = int.Parse(split[0]);
+			var count = int.Parse(split[1]);
+
+			var countValue = new ItemCount();
+			countValue.SetPercent(count);
+			Items.Add(new(itemId), countValue);
+		}
+	}
+
+	public override string ToString()
+	{
+		var str = string.Empty;
+		var i = 0;
+		foreach (var (item, count) in Items)
+		{
+			// Appending item ID (itemdefid) first
+			str += item.Id;
+
+			// Now same, for future purposes
+			if (count.PercentBased)
+			{
+				str += $"x{count.Value}";
+			}
+			else
+			{
+				str += $"x{count.Value}";
+			}
+
+			// Check if not last item
+			if (i++ < Items.Count - 1)
+			{
+				str += ";";
+			}
+		}
+		return str;
+	}
 }
 
 public class BundleJsonConverter : JsonConverter<Bundle>
 {
 	public override Bundle? ReadJson(JsonReader reader, Type objectType, Bundle? existingValue, bool hasExistingValue, JsonSerializer serializer)
 	{
-			var jsonString = reader.Value as string;
-			if (string.IsNullOrWhiteSpace(jsonString))
-			{
-				return new Bundle();
-			}
-
-			var itemsDict = new Dictionary<Item, ItemCount>();
-			// Separating all items
-			var separatedItems = jsonString.Split(';');
-			foreach (var value in separatedItems)
-			{
-				// Separate single item by item and its count
-				var split = value.Split('x');
-				var itemId = int.Parse(split[0]);
-				var count = int.Parse(split[1]);
-
-				var countValue = new ItemCount();
-				countValue.SetPercent(count);
-				itemsDict.Add(new(itemId), countValue);
-			}
-
-
-			return new Bundle()
-			{
-				Items = itemsDict
-			};
-		}
+		var jsonString = reader.Value as string;
+		return new Bundle(jsonString);
+	}
 
 	public override void WriteJson(JsonWriter writer, Bundle? value, JsonSerializer serializer)
 	{
-			var jsonString = string.Empty;
-			if(value == null)
-			{
-				writer.WriteNull();
-				return;
-			}
-
-			var i = 0;
-			foreach (var (item, count) in value.Items)
-			{
-				// Appending item ID (itemdefid) first
-				jsonString += item.Id;
-
-				// Now same, for future purposes
-				if (count.PercentBased)
-				{
-					jsonString += $"x{count.Value}";
-				}
-				else
-				{
-					jsonString += $"x{count.Value}";
-				}
-
-				// Check if not last item
-				if (i++ < value.Items.Count - 1)
-				{
-					jsonString += ";";
-				}
-			}
-			writer.WriteValue(jsonString);
+		if (value == null)
+		{
+			writer.WriteNull();
+			return;
 		}
+
+		var jsonString = value.ToString();
+		writer.WriteValue(jsonString);
+	}
 }

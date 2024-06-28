@@ -7,21 +7,18 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields;
 public class Promo
 {
 	public PromoRequirement[] PromoRequirements { get; set; } = new PromoRequirement[] { };
-}
+	
+	public Promo() { }
 
-public class PromoJsonConverter : JsonConverter<Promo>
-{
-	public override Promo? ReadJson(JsonReader reader, Type objectType, Promo? existingValue, bool hasExistingValue, JsonSerializer serializer)
+	public Promo(string sourceString)
 	{
-		var jsonString = reader.Value as string;
-		if (string.IsNullOrWhiteSpace(jsonString))
+		if (string.IsNullOrWhiteSpace(sourceString))
 		{
-			return new Promo();
+			return;
 		}
 
 		// Separating all promos
-		var separatingPromos = jsonString.Split(';');
-		var promos = new PromoRequirement[separatingPromos.Length];
+		var separatingPromos = sourceString.Split(';');
 		for (int i = 0; i < separatingPromos.Length; i++)
 		{
 			// Separate promo requirements by requiremnt and value
@@ -31,7 +28,7 @@ public class PromoJsonConverter : JsonConverter<Promo>
 			// Check if promo manual
 			if (split.Length == 1 && split[0] == "manual")
 			{
-				promos = new PromoRequirement[]
+				PromoRequirements = new PromoRequirement[]
 				{
 					new ManualPromoRequirement()
 				};
@@ -43,60 +40,69 @@ public class PromoJsonConverter : JsonConverter<Promo>
 
 			if(promoType == "owns")
 			{
-				promos[i] = new OwnAppPromoRequirement(int.Parse(promoValue));
+				PromoRequirements[i] = new OwnAppPromoRequirement(int.Parse(promoValue));
 			}
 			else if(promoType == "ach")
 			{
-				promos[i] = new OwnAchievementPromoRequirement(promoValue);
+				PromoRequirements[i] = new OwnAchievementPromoRequirement(promoValue);
 			}
 			else if(promoType == "played")
 			{
 				var playedSplit = promoValue.Split("/");
-				promos[i] = new PlayerTimePromoRequirement(int.Parse(playedSplit[0]), int.Parse(playedSplit[1]));
+				PromoRequirements[i] = new PlayerTimePromoRequirement(int.Parse(playedSplit[0]), int.Parse(playedSplit[1]));
 			}
 		}
+	}
 
-
-		return new Promo()
+	public override string ToString()
+	{
+		var str = string.Empty;
+		for (var i = 0; i < PromoRequirements.Length; i++)
 		{
-			PromoRequirements = promos
-		};
+			var requirement = PromoRequirements[i];
+			switch (requirement)
+			{
+				case OwnAppPromoRequirement ownAppPromo:
+					str += $"owns:{ownAppPromo.AppId}";
+					break;
+				case OwnAchievementPromoRequirement ownAchievementPromo:
+					str += $"ach:{ownAchievementPromo.AchievementId}";
+					break;
+				case PlayerTimePromoRequirement playerTimePromo:
+					str += $"played:{playerTimePromo.AppId}/{playerTimePromo.MinutesRequired}";
+					break;
+				case ManualPromoRequirement manualPromo:
+					str = "manual";
+					break;
+			}
+
+			// Check if not last item
+			if (i < PromoRequirements.Length - 1)
+			{
+				str += ";";
+			}
+		}
+		return str;
+	}
+}
+
+public class PromoJsonConverter : JsonConverter<Promo>
+{
+	public override Promo? ReadJson(JsonReader reader, Type objectType, Promo? existingValue, bool hasExistingValue, JsonSerializer serializer)
+	{
+		var jsonString = reader.Value as string;
+		return new Promo(jsonString);
 	}
 
 	public override void WriteJson(JsonWriter writer, Promo? value, JsonSerializer serializer)
 	{
-		var jsonString = string.Empty;
 		if (value == null)
 		{
 			writer.WriteNull();
 			return;
 		}
 
-		for (var i = 0; i < value.PromoRequirements.Length; i++)
-		{
-			var requirement = value.PromoRequirements[i];
-			switch (requirement)
-			{
-				case OwnAppPromoRequirement ownAppPromo:
-					jsonString += $"owns:{ownAppPromo.AppId}";
-					break;
-				case OwnAchievementPromoRequirement ownAchievementPromo:
-					jsonString += $"ach:{ownAchievementPromo.AchievementId}";
-					break;
-				case PlayerTimePromoRequirement playerTimePromo:
-					jsonString += $"played:{playerTimePromo.AppId}/{playerTimePromo.MinutesRequired}";
-					break;
-				case ManualPromoRequirement manualPromo:
-					jsonString = "manual";
-					break;
-			}
-
-			// Check if not last item
-			if (i < value.PromoRequirements.Length - 1)
-			{
-				jsonString += ";";
-			}
-		}
+		var jsonString = value.ToString();
 		writer.WriteValue(jsonString);
 	}
 }

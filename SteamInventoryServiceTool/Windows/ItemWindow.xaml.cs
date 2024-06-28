@@ -165,7 +165,7 @@ public partial class ItemWindow : Window
         IconUrlTextBox.Text = item.IconUrl;
         IconUrlLargeTextBox.Text = item.IconUrlLarge;
         PriceComboBox.SelectedIndex = (int)item.PriceCategory.Category;
-        TagsTextBox.Text = item.Tags.GetString();
+        TagsTextBox.Text = item.Tags.ToString();
         GameOnlyCheckBox.IsChecked = item.GameOnly;
         HiddenCheckBox.IsChecked = item.Hidden;
         StoreHiddenCheckBox.IsChecked = item.StoreHidden;

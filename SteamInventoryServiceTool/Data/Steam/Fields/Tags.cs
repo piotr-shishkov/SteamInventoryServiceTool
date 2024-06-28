@@ -7,19 +7,14 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields;
 public class Tags
 {
     public Dictionary<string, string> TagsDict { get; set; } = new Dictionary<string, string>();
-
-
-    public Tags()
-    {
-        
-    }
+    
+    public Tags() { }
 
     public Tags(string sourceString)
     {
         if (string.IsNullOrWhiteSpace(sourceString))
             return;
         
-        var tagsDict = new Dictionary<string, string>();
         // Separating all tags
         var separatedTags = sourceString.Split(';');
         foreach (var tagPair in separatedTags)
@@ -29,12 +24,11 @@ public class Tags
             var tag = split[0];
             var tagValue = split[1];
 
-            tagsDict.Add(tag, tagValue);
+            TagsDict.Add(tag, tagValue);
         }
-        TagsDict = tagsDict;
     }
-    
-    public string GetString()
+
+    public override string ToString()
     {
         var str = string.Empty;
         var i = 0;
@@ -63,14 +57,13 @@ public class TagsJsonConverter : JsonConverter<Tags>
 
     public override void WriteJson(JsonWriter writer, Tags? value, JsonSerializer serializer)
     {
-        var jsonString = string.Empty;
         if (value == null)
         {
             writer.WriteNull();
             return;
         }
 
-        jsonString = value.GetString();
+        var jsonString = value.ToString();
         writer.WriteValue(jsonString);
     }
 }
