@@ -12,6 +12,7 @@ public class Workspace
 {
 	public int AppId { get; set; }
 	public string Name { get; set; }
+	public List<string> Tags { get; set; } = new();
 	public List<Item> Items { get; set; } = new();
 		
 	[JsonIgnore]
@@ -24,6 +25,28 @@ public class Workspace
 		AppId = appId;
 		Name = name;
 	}
+
+	#region Tags Control
+
+	public void AddTag(string tag)
+	{
+		if(string.IsNullOrWhiteSpace(tag))
+			return;
+		
+		Tags.Add(tag);
+		Update();
+		Save();
+	}
+
+	public void RemoveTag(string tag)
+	{
+		if(!Tags.Remove(tag))
+			return;
+		Update();
+		Save();
+	}
+
+	#endregion
 
 	#region Item Control
 	
@@ -42,7 +65,8 @@ public class Workspace
 
 	public void RemoveItem(Item item)
 	{
-		Items.Remove(item);
+		if(!Items.Remove(item))
+			return;
 		SortItems();
 		Update();
 		Save();

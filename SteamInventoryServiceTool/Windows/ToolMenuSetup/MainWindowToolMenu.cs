@@ -42,7 +42,7 @@ internal class MainWindowToolMenu
         AddItem("New", "Items", AddNewItem);
         AddItem("Clear All", "Items");
         _toolMenu.AddSeparator("Items");
-        AddItem("Tags Control", "Items");
+        AddItem("Tags Control", "Items", OpenTagEditor);
         _toolMenu.AddSeparator("Items");
         AddItem("Import", "Items");
         AddItem("JSON", "Items/Import");
@@ -74,7 +74,7 @@ internal class MainWindowToolMenu
     }
 
     #region Workspace Controls
-        
+
     public void SetWorkspace(Workspace workspace)
     {
         _activeWorkspace = workspace;
@@ -89,7 +89,13 @@ internal class MainWindowToolMenu
     {
         _activeWorkspace.Save();
     }
-        
+
+    private void OpenTagEditor()
+    {
+        var editTagsWindow = new EditTagsDialogWindow();
+        editTagsWindow.ShowDialog();
+    }
+
     #endregion
 
     #region Item Controls
