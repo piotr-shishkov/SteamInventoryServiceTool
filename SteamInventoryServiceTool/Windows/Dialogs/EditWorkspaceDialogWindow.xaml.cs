@@ -6,12 +6,7 @@ namespace SteamInventoryServiceTool.Windows.Dialogs;
 public partial class EditWorkspaceDialogWindow : Window
 {
     private Workspace _targetWorkspace;
-
-    public EditWorkspaceDialogWindow()
-    {
-        InitializeComponent();
-    }
-
+    
     public EditWorkspaceDialogWindow(Workspace workspace)
     {
         InitializeComponent();

@@ -51,6 +51,7 @@ public partial class ItemWindow : Window
         PriceComboBox.SelectedIndex = 0;
         
         TagsEditButton.Click += OpenTagEditor;
+        BundleEditButton.Click += OpenBundleEditor;
 
         AutoRefreshCheckBox.IsChecked = true;
         AutoRefreshCheckBox.Click += AutoRefreshClicked;
@@ -61,12 +62,19 @@ public partial class ItemWindow : Window
         
         ToggleAutoRefresh();
     }
-    
+
     private void OpenTagEditor(object sender, RoutedEventArgs e)
     {
         var tagSelector = new SelectTagsDialogWindow(GetItem());
         tagSelector.ShowDialog();
         FillItem(tagSelector.Item);
+    }
+
+    private void OpenBundleEditor(object sender, RoutedEventArgs e)
+    {
+        var bundleSelector = new SelectBundleDialogWindow(GetItem());
+        bundleSelector.ShowDialog();
+        FillItem(bundleSelector.Item);
     }
 
     private void CreateItemPreview()

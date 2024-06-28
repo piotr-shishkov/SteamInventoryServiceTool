@@ -2,12 +2,14 @@
 using SteamInventoryServiceTool.Data.Steam.Misc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Data.Steam.Fields;
 
 public class Bundle
 {
-	public Dictionary<Item, ItemCount> Items { get; set; } = new Dictionary<Item, ItemCount>();
+	public Dictionary<int, ItemCount> Items { get; set; } = new Dictionary<int, ItemCount>();
 
 	public Bundle() { }
 
@@ -29,7 +31,7 @@ public class Bundle
 
 			var countValue = new ItemCount();
 			countValue.SetPercent(count);
-			Items.Add(new(itemId), countValue);
+			Items.Add(itemId, countValue);
 		}
 	}
 
@@ -37,10 +39,10 @@ public class Bundle
 	{
 		var str = string.Empty;
 		var i = 0;
-		foreach (var (item, count) in Items)
+		foreach (var (id, count) in Items)
 		{
 			// Appending item ID (itemdefid) first
-			str += item.Id;
+			str += id;
 
 			// Now same, for future purposes
 			if (count.PercentBased)

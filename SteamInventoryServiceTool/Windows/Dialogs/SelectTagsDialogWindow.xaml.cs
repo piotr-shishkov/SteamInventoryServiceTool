@@ -9,7 +9,7 @@ namespace SteamInventoryServiceTool.Windows.Dialogs;
 
 public partial class SelectTagsDialogWindow : Window
 {
-    public Item Item { get; private set; }
+    public Item Item { get; }
     
     private readonly Workspace _activeWorkspace;
     private SelectTagsListViewHandler _tagsListHandler;
@@ -20,7 +20,7 @@ public partial class SelectTagsDialogWindow : Window
 
         Item = item;
         _activeWorkspace = WorkspaceManager.Instance.ActiveWorkspace;
-        _tagsListHandler = new SelectTagsListViewHandler(TagsListView, item);
+        _tagsListHandler = new SelectTagsListViewHandler(TagsListView, Item);
         
         AddTagButton.Click += AddTag;
         CloseButton.Click += CloseDialog;
