@@ -64,6 +64,6 @@ public class EditTagsListViewHandler
     private void FillWorkspaceTags()
     {
         _listView.ItemsSource = null;
-        _listView.ItemsSource = _workspace.Tags;
+        _listView.ItemsSource = _workspace.Tags.ToList();
     }
 }
