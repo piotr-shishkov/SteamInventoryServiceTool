@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using SteamInventoryServiceTool.Workspaces;
 
@@ -16,7 +18,7 @@ public class TagsListViewHandler
         _listView = listView;
         _listView.KeyDown += OnListKeyDown;
     }
-
+    
     public void SetWorkspace(Workspace workspace)
     {
         if (_workspace != null)
@@ -32,7 +34,7 @@ public class TagsListViewHandler
     {
         if (e.Key == Key.Delete)
         {
-            var selectedItems = _listView.SelectedItems.Cast<string>().ToList();
+            var selectedItems = _listView.SelectedItems.Cast<KeyValuePair<string, List<string>>>().ToList();
             if (selectedItems.Any())
             {
                 var result = MessageBox.Show(
@@ -45,7 +47,10 @@ public class TagsListViewHandler
                 {
                     foreach (var item in selectedItems)
                     {
-                        _workspace.RemoveTag(item);
+                        foreach (var value in item.Value)
+                        {
+                            _workspace.RemoveTag(item.Key, value);
+                        }
                     }
                 }
             }

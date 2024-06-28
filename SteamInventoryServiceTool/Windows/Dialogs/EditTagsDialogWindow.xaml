@@ -9,12 +9,32 @@
         ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Icon="/Resources/AppLogo_Small.png">
     <StackPanel Margin="10">
         <TextBlock Text="Tags:" Margin="0 0 0 5"/>
-        <ListView x:Name="TagsListView" Height="200" Margin="0 0 0 10">
+        <ListView x:Name="TagsListView" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="200" Margin="0 0 0 10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Key" Width="150" DisplayMemberBinding="{Binding Key}"/>
+                    <GridViewColumn Header="Values" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Value}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
         <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
             <TextBlock Text="New Tag:" Margin="0 0 10 0"/>
-            <TextBox x:Name="NewTagTextBox" Width="200" Margin="0 0 10 0"/>
-            <Button x:Name="AddTagButton" Content="Add" Width="75" Margin="0 0 0 0"/>
+            <TextBox x:Name="NewTagTextBox" Width="100" Margin="0 0 10 0"/>
+            <TextBox x:Name="NewTagValueTextBox" Width="100" Margin="0 0 10 0"/>
+            <Button x:Name="AddTagButton" Content="+" Width="35" Margin="0 0 5 0"/>
+            <Button x:Name="RemoveTagButton" Content="-" Width="35" Margin="0 0 0 0"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="CloseButton" Content="Close" Width="75" Margin="0 0 0 0"/>

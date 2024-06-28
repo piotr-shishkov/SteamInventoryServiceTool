@@ -12,7 +12,7 @@ public class Workspace
 {
 	public int AppId { get; set; }
 	public string Name { get; set; }
-	public List<string> Tags { get; set; } = new();
+	public Dictionary<string, List<string>> Tags { get; set; } = new();
 	public List<Item> Items { get; set; } = new();
 		
 	[JsonIgnore]
@@ -28,20 +28,32 @@ public class Workspace
 
 	#region Tags Control
 
-	public void AddTag(string tag)
+	public void AddTag(string tag, string value)
 	{
-		if(string.IsNullOrWhiteSpace(tag))
+		if(string.IsNullOrWhiteSpace(tag) || string.IsNullOrWhiteSpace(value))
 			return;
-		
-		Tags.Add(tag);
+
+		if (Tags.TryGetValue(tag, out var values))
+		{
+			values.Add(value);
+		}
+		else
+		{
+			Tags.Add(tag, new List<string>() {value});
+		}
 		Update();
 		Save();
 	}
 
-	public void RemoveTag(string tag)
+	public void RemoveTag(string tag, string value)
 	{
-		if(!Tags.Remove(tag))
-			return;
+		if (Tags.TryGetValue(tag, out var values))
+		{
+			if(!values.Remove(value))
+				return;
+			if (values.Count == 0)
+				Tags.Remove(tag);
+		}
 		Update();
 		Save();
 	}
