@@ -14,7 +14,7 @@ public class TagsJsonConverter : JsonConverter<Tags>
     public override Tags? ReadJson(JsonReader reader, Type objectType, Tags? existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
         var jsonString = reader.Value as string;
-        if (jsonString == null)
+        if (string.IsNullOrWhiteSpace(jsonString))
         {
             return new Tags();
         }
