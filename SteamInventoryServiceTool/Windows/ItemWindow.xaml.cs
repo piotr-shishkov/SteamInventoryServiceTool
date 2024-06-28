@@ -166,6 +166,8 @@ public partial class ItemWindow : Window
         IconUrlLargeTextBox.Text = item.IconUrlLarge;
         PriceComboBox.SelectedIndex = (int)item.PriceCategory.Category;
         TagsTextBox.Text = item.Tags.ToString();
+        BundleTextBox.Text = item.Bundle.ToString();
+        PromoTextBox.Text = item.Promo.ToString();
         GameOnlyCheckBox.IsChecked = item.GameOnly;
         HiddenCheckBox.IsChecked = item.Hidden;
         StoreHiddenCheckBox.IsChecked = item.StoreHidden;
@@ -197,6 +199,8 @@ public partial class ItemWindow : Window
             IconUrlLarge = IconUrlLargeTextBox.Text,
             PriceCategory = new PriceCategory((PriceCategories)PriceComboBox.SelectedIndex),
             Tags = new Tags(TagsTextBox.Text),
+            Bundle = new Bundle(BundleTextBox.Text),
+            Promo = new Promo(PromoTextBox.Text),
             GameOnly = GameOnlyCheckBox.IsChecked!.Value,
             Hidden = HiddenCheckBox.IsChecked!.Value,
             StoreHidden = StoreHiddenCheckBox.IsChecked!.Value,
