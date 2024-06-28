@@ -1,0 +1,29 @@
+﻿<Window x:Class="SteamInventoryServiceTool.Windows.Dialogs.SelectTagsDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:SteamInventoryServiceTool.Windows.Dialogs"
+        mc:Ignorable="d"
+        Title="Select Tags" Height="350" Width="400"
+        ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Icon="/Resources/AppLogo_Small.png">
+    <StackPanel Margin="10">
+        <TextBlock Text="Tags:" Margin="0 0 0 5"/>
+        <ListView x:Name="TagsListView" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="200" Margin="0 0 0 10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Key" Width="150" DisplayMemberBinding="{Binding Key}"/>
+                    <GridViewColumn Header="Value" Width="300" DisplayMemberBinding="{Binding Value}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
+            <TextBlock Text="Add Tag:" Margin="0 0 10 0"/>
+            <ComboBox x:Name="TagComboBox" Width="110" Margin="0 0 10 0"/>
+            <ComboBox x:Name="TagValueComboBox" Width="110" Margin="0 0 10 0"/>
+            <Button x:Name="AddTagButton" Content="Add" Width="50" Margin="0 0 0 0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="CloseButton" Content="Close" Width="75" Margin="0 0 0 0"/>
+        </StackPanel>
+    </StackPanel></Window>

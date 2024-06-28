@@ -2,18 +2,17 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows.ListViews;
 
-public class TagsListViewHandler
+public class EditTagsListViewHandler
 {
     private ListView _listView;
     private Workspace _workspace;
 
-    public TagsListViewHandler(ListView listView)
+    public EditTagsListViewHandler(ListView listView)
     {
         _listView = listView;
         _listView.KeyDown += OnListKeyDown;

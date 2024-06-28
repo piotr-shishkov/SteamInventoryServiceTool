@@ -8,14 +8,14 @@ namespace SteamInventoryServiceTool.Windows.Dialogs;
 public partial class EditTagsDialogWindow : Window
 {
     private WorkspaceManager _workspaceManager;
-    private TagsListViewHandler _tagsListHandler;
+    private EditTagsListViewHandler _tagsListHandler;
     
     public EditTagsDialogWindow()
     {
         InitializeComponent();
         _workspaceManager = WorkspaceManager.Instance;
         
-        _tagsListHandler = new TagsListViewHandler(TagsListView);
+        _tagsListHandler = new EditTagsListViewHandler(TagsListView);
         _tagsListHandler.SetWorkspace(_workspaceManager.ActiveWorkspace);
         
         AddTagButton.Click += AddTag;

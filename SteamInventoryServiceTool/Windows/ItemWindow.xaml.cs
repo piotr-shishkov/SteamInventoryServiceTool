@@ -6,6 +6,7 @@ using System.Windows.Documents;
 using System.Windows.Threading;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Fields;
+using SteamInventoryServiceTool.Windows.Dialogs;
 using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows;
@@ -48,6 +49,8 @@ public partial class ItemWindow : Window
         }
         PriceComboBox.ItemsSource = prices;
         PriceComboBox.SelectedIndex = 0;
+        
+        TagsEditButton.Click += OpenTagEditor;
 
         AutoRefreshCheckBox.IsChecked = true;
         AutoRefreshCheckBox.Click += AutoRefreshClicked;
@@ -58,7 +61,13 @@ public partial class ItemWindow : Window
         
         ToggleAutoRefresh();
     }
-
+    
+    private void OpenTagEditor(object sender, RoutedEventArgs e)
+    {
+        var tagSelector = new SelectTagsDialogWindow(GetItem());
+        tagSelector.ShowDialog();
+        FillItem(tagSelector.Item);
+    }
 
     private void CreateItemPreview()
     {
@@ -156,7 +165,7 @@ public partial class ItemWindow : Window
         IconUrlTextBox.Text = item.IconUrl;
         IconUrlLargeTextBox.Text = item.IconUrlLarge;
         PriceComboBox.SelectedIndex = (int)item.PriceCategory.Category;
-        // TagsTextBox.Text
+        TagsTextBox.Text = item.Tags.GetString();
         GameOnlyCheckBox.IsChecked = item.GameOnly;
         HiddenCheckBox.IsChecked = item.Hidden;
         StoreHiddenCheckBox.IsChecked = item.StoreHidden;
@@ -187,7 +196,7 @@ public partial class ItemWindow : Window
             IconUrl = IconUrlTextBox.Text,
             IconUrlLarge = IconUrlLargeTextBox.Text,
             PriceCategory = new PriceCategory((PriceCategories)PriceComboBox.SelectedIndex),
-            // tags
+            Tags = new Tags(TagsTextBox.Text),
             GameOnly = GameOnlyCheckBox.IsChecked!.Value,
             Hidden = HiddenCheckBox.IsChecked!.Value,
             StoreHidden = StoreHiddenCheckBox.IsChecked!.Value,

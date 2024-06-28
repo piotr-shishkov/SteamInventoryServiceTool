@@ -7,21 +7,21 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields;
 public class Tags
 {
     public Dictionary<string, string> TagsDict { get; set; } = new Dictionary<string, string>();
-}
 
-public class TagsJsonConverter : JsonConverter<Tags>
-{
-    public override Tags? ReadJson(JsonReader reader, Type objectType, Tags? existingValue, bool hasExistingValue, JsonSerializer serializer)
+
+    public Tags()
     {
-        var jsonString = reader.Value as string;
-        if (string.IsNullOrWhiteSpace(jsonString))
-        {
-            return new Tags();
-        }
+        
+    }
 
+    public Tags(string sourceString)
+    {
+        if (string.IsNullOrWhiteSpace(sourceString))
+            return;
+        
         var tagsDict = new Dictionary<string, string>();
         // Separating all tags
-        var separatedTags = jsonString.Split(';');
+        var separatedTags = sourceString.Split(';');
         foreach (var tagPair in separatedTags)
         {
             // Separate single item by item and its count
@@ -31,11 +31,34 @@ public class TagsJsonConverter : JsonConverter<Tags>
 
             tagsDict.Add(tag, tagValue);
         }
-
-        return new Tags()
+        TagsDict = tagsDict;
+    }
+    
+    public string GetString()
+    {
+        var str = string.Empty;
+        var i = 0;
+        foreach (var (tag, tagValue) in TagsDict)
         {
-            TagsDict = tagsDict
-        };
+            str += tag;
+            str += $":{tagValue}";
+
+            // Check if not last item
+            if (i++ < TagsDict.Count - 1)
+            {
+                str += ";";
+            }
+        }
+        return str;
+    }
+}
+
+public class TagsJsonConverter : JsonConverter<Tags>
+{
+    public override Tags? ReadJson(JsonReader reader, Type objectType, Tags? existingValue, bool hasExistingValue, JsonSerializer serializer)
+    {
+        var jsonString = reader.Value as string;
+        return new Tags(jsonString);
     }
 
     public override void WriteJson(JsonWriter writer, Tags? value, JsonSerializer serializer)
@@ -47,18 +70,7 @@ public class TagsJsonConverter : JsonConverter<Tags>
             return;
         }
 
-        var i = 0;
-        foreach (var (tag, tagValue) in value.TagsDict)
-        {
-            jsonString += tag;
-            jsonString += $":{tagValue}";
-
-            // Check if not last item
-            if (i++ < value.TagsDict.Count - 1)
-            {
-                jsonString += ";";
-            }
-        }
+        jsonString = value.GetString();
         writer.WriteValue(jsonString);
     }
 }
