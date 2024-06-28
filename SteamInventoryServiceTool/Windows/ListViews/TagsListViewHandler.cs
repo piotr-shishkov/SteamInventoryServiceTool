@@ -47,7 +47,7 @@ public class TagsListViewHandler
                 {
                     foreach (var item in selectedItems)
                     {
-                        foreach (var value in item.Value)
+                        foreach (var value in item.Value.ToArray())
                         {
                             _workspace.RemoveTag(item.Key, value);
                         }
