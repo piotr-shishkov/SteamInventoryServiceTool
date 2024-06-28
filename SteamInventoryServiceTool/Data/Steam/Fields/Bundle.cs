@@ -15,7 +15,7 @@ public class BundleJsonConverter : JsonConverter<Bundle>
 	public override Bundle? ReadJson(JsonReader reader, Type objectType, Bundle? existingValue, bool hasExistingValue, JsonSerializer serializer)
 	{
 			var jsonString = reader.Value as string;
-			if (jsonString == null)
+			if (string.IsNullOrWhiteSpace(jsonString))
 			{
 				return new Bundle();
 			}

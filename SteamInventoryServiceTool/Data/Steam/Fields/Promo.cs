@@ -14,7 +14,7 @@ public class PromoJsonConverter : JsonConverter<Promo>
 	public override Promo? ReadJson(JsonReader reader, Type objectType, Promo? existingValue, bool hasExistingValue, JsonSerializer serializer)
 	{
 		var jsonString = reader.Value as string;
-		if (jsonString == null)
+		if (string.IsNullOrWhiteSpace(jsonString))
 		{
 			return new Promo();
 		}
