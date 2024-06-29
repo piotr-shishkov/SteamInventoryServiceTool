@@ -28,7 +28,7 @@ public partial class SelectBundleDialogWindow : Window
         CloseButton.Click += CloseDialog;
         
         UpdateComboBox();
-        ItemComboBoxSelectionChanged(default, default);
+        ItemComboBoxSelectionChanged(null, null);
     }
 
     private void UpdateComboBox()
