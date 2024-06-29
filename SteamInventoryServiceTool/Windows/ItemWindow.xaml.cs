@@ -63,6 +63,11 @@ public partial class ItemWindow : Window
         _disptacherTimer.Tick += OnTimerTick;
         _disptacherTimer.Interval = TimeSpan.FromMilliseconds(500);
         
+        AddButton.Click += AddButtonOnClick;
+        AddNCloseButton.Click += AddNCloseButtonOnClick;
+        CloseButton.Click += CloseButtonOnClick;
+        RefreshButton.Click += RefreshButtonOnClick;
+        
         ToggleAutoRefresh();
     }
 
@@ -137,21 +142,26 @@ public partial class ItemWindow : Window
             AddNCloseButton.Content = "Save & Close";
             AddButton.ToolTip = "Saves item and closes window.";
         }
-            
-        AddButton.Click += AddButtonOnClick;
-        AddNCloseButton.Click += AddNCloseButtonOnClick;
-        CloseButton.Click += CloseButtonOnClick;
-        RefreshButton.Click += RefreshButtonOnClick;
     }
 
     private void AddButtonOnClick(object sender, RoutedEventArgs e)
     {
-        AddCurrentItem();
         var item = GetItem();
-        item.Id = _workspaceManager.ActiveWorkspace.GetNextItemId();
+        if (string.IsNullOrWhiteSpace(item.Name))
+        {
+            MessageBox.Show("Item name could not be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
         
-        if(_openType == ItemOpenType.Edit)
+        AddCurrentItem();
+
+        item.Id = _workspaceManager.ActiveWorkspace.GetNextItemId();
+        item.Name = "";
+        
+        if (_openType == ItemOpenType.Edit)
+        {
             SetOpenType(ItemOpenType.New);
+        }
         FillItem(item);
     }
 
