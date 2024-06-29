@@ -37,7 +37,6 @@ public partial class SelectBundleDialogWindow : Window
             return;
         
         ItemsComboBox.ItemsSource = _activeWorkspace.Items;
-        ItemsComboBox.DisplayMemberPath = "Name";
         ItemsComboBox.SelectedIndex = 0;
     }
 

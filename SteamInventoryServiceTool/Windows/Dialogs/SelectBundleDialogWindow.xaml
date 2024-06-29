@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:SteamInventoryServiceTool.Windows.Dialogs"
         mc:Ignorable="d"
-        Title="Select Bundle" Height="350" Width="400"
+        Title="Select Bundle" Height="400" Width="400"
         ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Icon="/Resources/AppLogo_Small.png">
     <StackPanel Margin="10">
         <TextBlock Text="Bundle Items:" Margin="0 0 0 5" />
@@ -25,10 +25,19 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
-            <TextBlock Text="Add Item:" Margin="0 0 10 0" />
-            <ComboBox x:Name="ItemsComboBox" Width="150" Margin="0 0 10 0" />
-            <TextBlock Text="x" Margin="5 0 5 0"/>
+        <TextBlock Text="Add Item:" VerticalAlignment="Center" Margin="0 0 0 10" />
+        <StackPanel Orientation="Horizontal" Height="30" Margin="0 0 0 10" HorizontalAlignment="Right">
+            <ComboBox x:Name="ItemsComboBox" Width="200" Margin="0 0 0 0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding IconUrl}" Width="30" Height="30" Margin="5"/>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="x" FontSize="24" Margin="5 0 5 0"/>
             <TextBox x:Name="ItemCountTextBox" Width="50" Margin="0 0 10 0"/>
             <Button x:Name="AddItemButton" Content="Add" Width="50" Margin="0 0 0 0" />
         </StackPanel>
