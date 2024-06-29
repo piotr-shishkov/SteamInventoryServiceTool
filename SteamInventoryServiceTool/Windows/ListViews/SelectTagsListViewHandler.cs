@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SteamInventoryServiceTool.Data.Steam;
-using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows.ListViews;
 

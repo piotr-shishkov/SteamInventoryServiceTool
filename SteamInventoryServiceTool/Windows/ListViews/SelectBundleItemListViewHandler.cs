@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SteamInventoryServiceTool.Data.Common;
 using SteamInventoryServiceTool.Data.Steam;
-using SteamInventoryServiceTool.Data.Steam.Misc;
 using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows.ListViews;

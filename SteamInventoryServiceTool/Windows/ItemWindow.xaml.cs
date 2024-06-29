@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Threading;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Fields;

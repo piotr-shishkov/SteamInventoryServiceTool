@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Windows;
 using SteamInventoryServiceTool.Utility;
 using System.Windows.Controls;
-using System.Windows.Input;
 using SteamInventoryServiceTool.Windows.Dialogs;
 using SteamInventoryServiceTool.Workspaces;
 
