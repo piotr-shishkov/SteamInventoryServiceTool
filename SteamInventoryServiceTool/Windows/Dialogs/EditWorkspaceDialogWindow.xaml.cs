@@ -31,6 +31,7 @@ public partial class EditWorkspaceDialogWindow : Window
         _targetWorkspace.AppId = id;
         _targetWorkspace.Name = workspaceName;
         _targetWorkspace.Update();
+        _targetWorkspace.Save();
         DialogResult = true;
         Close();
     }
