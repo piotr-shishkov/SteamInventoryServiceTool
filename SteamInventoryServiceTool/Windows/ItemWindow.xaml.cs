@@ -216,6 +216,7 @@ public partial class ItemWindow : Window
         UseBundlePriceCheckBox.IsChecked = item.UseBundlePrice;
         AutoStackCheckBox.IsChecked = item.AutoStack;
         UseDropLimitCheckBox.IsChecked = item.UseDropLimit;
+        DropLimitTextBox.Text = item.DropLimit.ToString();
         DropIntervalTextBox.Text = item.DropInterval.ToString();
         UseDropWindowCheckBox.IsChecked = item.UseDropWindow;
         DropPerWindowTextBox.Text = item.DropMaxPerWindow.ToString();
@@ -253,7 +254,12 @@ public partial class ItemWindow : Window
             UseDropLimit = UseDropLimitCheckBox.IsChecked!.Value,
             UseDropWindow = UseDropWindowCheckBox.IsChecked!.Value,
         };
-            
+        
+        if(int.TryParse(DropIntervalTextBox.Text, out var dropLimitValue))
+        {
+            item.DropLimit = dropLimitValue;
+        }
+        
         if(int.TryParse(DropIntervalTextBox.Text, out var dropIntervalValue))
         {
             item.DropInterval = dropIntervalValue;

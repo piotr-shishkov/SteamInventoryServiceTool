@@ -74,6 +74,9 @@ public class Item
     [JsonProperty("use_drop_limit")]
     public bool UseDropLimit { get; set; }
 
+    [JsonProperty("drop_limit")]
+    public int DropLimit { get; set; }
+    
     [JsonProperty("drop_interval")]
     public int DropInterval { get; set; }
 

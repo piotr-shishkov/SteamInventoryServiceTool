@@ -82,8 +82,8 @@
             <CheckBox x:Name="UseBundlePriceCheckBox" Content="Use Bundle Price" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" VerticalAlignment="Center" Grid.Row="20"/>
             <CheckBox x:Name="AutoStackCheckBox" Content="Auto Stack" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" Grid.Row="21"/>
             <CheckBox x:Name="UseDropLimitCheckBox" Content="Use Drop Limit" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="16"/>
-            <TextBox x:Name="DropIntervalTextBox" Margin="264,0,12,0" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="18"/>
-            <Label Content="Drop Interval" Margin="264,0,12,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="17" VerticalContentAlignment="Bottom"/>
+            <TextBox x:Name="DropIntervalTextBox" Margin="370,1,12,1" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="18"/>
+            <Label Content="Drop Interval:" Margin="264,0,152,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="18" VerticalContentAlignment="Center"/>
             <CheckBox x:Name="UseDropWindowCheckBox" Content="Use Drop Window" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="19"/>
             <TextBox x:Name="DropPerWindowTextBox" Margin="264,0,12,0" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="21"/>
             <Label Content="Drop Max Per Window" Margin="264,0,7,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Width="246" Grid.Row="20" VerticalContentAlignment="Bottom"/>
@@ -96,6 +96,8 @@
             <TextBox x:Name="PromoTextBox" Margin="264,3,12,5" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" Grid.Row="15" IsEnabled="False"/>
             <Button x:Name="PromoEditButton" Content="EDIT" Margin="452,3,12,5" Grid.Row="15"/>
             <Button x:Name="BundleEditButton" Content="EDIT" Margin="200,3,264,5" Grid.Row="15"/>
+            <TextBox x:Name="DropLimitTextBox" Margin="370,1,12,1" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="17"/>
+            <Label Content="Drop Limit:" Margin="264,0,152,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="17" VerticalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
