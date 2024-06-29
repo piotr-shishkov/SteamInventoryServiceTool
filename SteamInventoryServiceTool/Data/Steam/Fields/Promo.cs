@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using SteamInventoryServiceTool.Data.Steam.Misc;
 using System;
+using System.Collections.Generic;
 
 namespace SteamInventoryServiceTool.Data.Steam.Fields;
 
 public class Promo
 {
-	public PromoRequirement[] PromoRequirements { get; set; } = new PromoRequirement[] { };
+	public List<PromoRequirement> PromoRequirements { get; set; } = new List<PromoRequirement> { };
 	
 	public Promo() { }
 
@@ -21,14 +22,14 @@ public class Promo
 		var separatingPromos = sourceString.Split(';');
 		for (int i = 0; i < separatingPromos.Length; i++)
 		{
-			// Separate promo requirements by requiremnt and value
+			// Separate promo requirements by requirement and value
 			var promo = separatingPromos[i];
 			var split = promo.Split(':');
 
 			// Check if promo manual
 			if (split.Length == 1 && split[0] == "manual")
 			{
-				PromoRequirements = new PromoRequirement[]
+				PromoRequirements = new List<PromoRequirement>()
 				{
 					new ManualPromoRequirement()
 				};
@@ -40,16 +41,16 @@ public class Promo
 
 			if(promoType == "owns")
 			{
-				PromoRequirements[i] = new OwnAppPromoRequirement(int.Parse(promoValue));
+				PromoRequirements.Add(new OwnAppPromoRequirement(int.Parse(promoValue)));
 			}
 			else if(promoType == "ach")
 			{
-				PromoRequirements[i] = new OwnAchievementPromoRequirement(promoValue);
+				PromoRequirements.Add(new OwnAchievementPromoRequirement(promoValue));
 			}
 			else if(promoType == "played")
 			{
 				var playedSplit = promoValue.Split("/");
-				PromoRequirements[i] = new PlayerTimePromoRequirement(int.Parse(playedSplit[0]), int.Parse(playedSplit[1]));
+				PromoRequirements.Add(new PlayerTimePromoRequirement(int.Parse(playedSplit[0]), int.Parse(playedSplit[1])));
 			}
 		}
 	}
@@ -57,7 +58,7 @@ public class Promo
 	public override string ToString()
 	{
 		var str = string.Empty;
-		for (var i = 0; i < PromoRequirements.Length; i++)
+		for (var i = 0; i < PromoRequirements.Count; i++)
 		{
 			var requirement = PromoRequirements[i];
 			switch (requirement)
@@ -77,7 +78,7 @@ public class Promo
 			}
 
 			// Check if not last item
-			if (i < PromoRequirements.Length - 1)
+			if (i < PromoRequirements.Count - 1)
 			{
 				str += ";";
 			}

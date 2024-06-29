@@ -1,0 +1,33 @@
+﻿<Window x:Class="SteamInventoryServiceTool.Windows.Dialogs.SelectPromoDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:SteamInventoryServiceTool.Windows.Dialogs"
+        mc:Ignorable="d"
+        Title="Select Promo" Height="450" Width="600"
+        ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Icon="/Resources/AppLogo_Small.png">
+    <StackPanel Margin="10">
+        <TextBlock Text="Edit Promo:" Margin="0 0 0 10" />
+        <CheckBox x:Name="IsManualCheckBox" Content="Is Manual Promo" Margin="0 0 0 10"/>
+        <ListView x:Name="PromoListView" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="200" Margin="0 0 0 10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="App ID" Width="100" DisplayMemberBinding="{Binding AppId}" />
+                    <GridViewColumn Header="Minutes" Width="150" DisplayMemberBinding="{Binding MinutesRequired}" />
+                    <GridViewColumn Header="Achievement ID" Width="220" DisplayMemberBinding="{Binding AchievementId}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Text="Add Promo:" Margin="0 0 0 10" />
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
+            <ComboBox x:Name="PromoTypeComboBox" Width="230" Margin="0 0 10 0" />
+            <TextBox x:Name="PromoValueTextBox" Width="230" Margin="0 0 10 0"/>
+            <Button x:Name="AddPromoButton" Content="Add" Width="75" Margin="0 0 0 0" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="CloseButton" Content="Close" Width="75" Margin="0 0 0 0" />
+        </StackPanel>
+    </StackPanel>
+</Window>

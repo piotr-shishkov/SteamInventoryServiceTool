@@ -1,12 +1,24 @@
 ﻿namespace SteamInventoryServiceTool.Data.Steam.Misc;
 
-public abstract class PromoRequirement { }
+public enum PromoType
+{
+	OwnApp,
+	OwnAchievement,
+	PlayerTime,
+	Manual
+}
+
+public abstract class PromoRequirement
+{
+	public abstract PromoType Type { get; }
+}
 
 /// <summary>
 /// Check if player owns specified app
 /// </summary>
 public class OwnAppPromoRequirement : PromoRequirement
 {
+	public override PromoType Type => PromoType.OwnApp;
 	public int AppId { get; set; }
 
 	/// <summary>
@@ -23,6 +35,7 @@ public class OwnAppPromoRequirement : PromoRequirement
 /// </summary>
 public class OwnAchievementPromoRequirement : PromoRequirement
 {
+	public override PromoType Type => PromoType.OwnAchievement;
 	public string AchievementId { get; set; }
 
 	/// <summary>
@@ -39,6 +52,7 @@ public class OwnAchievementPromoRequirement : PromoRequirement
 /// </summary>
 public class PlayerTimePromoRequirement : PromoRequirement
 {
+	public override PromoType Type => PromoType.PlayerTime;
 	public int AppId { get; set; }
 	public int MinutesRequired { get; set; }
 
@@ -56,4 +70,7 @@ public class PlayerTimePromoRequirement : PromoRequirement
 /// <summary>
 /// Used for timed drop events
 /// </summary>
-public class ManualPromoRequirement : PromoRequirement { }
+public class ManualPromoRequirement : PromoRequirement
+{
+	public override PromoType Type => PromoType.Manual;
+}

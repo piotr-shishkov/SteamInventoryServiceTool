@@ -54,6 +54,7 @@ public partial class ItemWindow : Window
         
         TagsEditButton.Click += OpenTagEditor;
         BundleEditButton.Click += OpenBundleEditor;
+        PromoEditButton.Click += OpenPromoEditor;
 
         AutoRefreshCheckBox.IsChecked = true;
         AutoRefreshCheckBox.Click += AutoRefreshClicked;
@@ -83,6 +84,13 @@ public partial class ItemWindow : Window
         var bundleSelector = new SelectBundleDialogWindow(GetItem());
         bundleSelector.ShowDialog();
         FillItem(bundleSelector.Item);
+    }
+
+    private void OpenPromoEditor(object sender, RoutedEventArgs e)
+    {
+        var promoSelector = new SelectPromoDialogWindow(GetItem());
+        promoSelector.ShowDialog();
+        FillItem(promoSelector.Item);
     }
 
     private void CreateItemPreview()
