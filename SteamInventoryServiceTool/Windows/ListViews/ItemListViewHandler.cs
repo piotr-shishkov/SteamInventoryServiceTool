@@ -17,36 +17,8 @@ public class ItemListViewHandler
     public ItemListViewHandler(ListView listView)
     {
         _listView = listView;
-        _listView.Loaded += OnListViewLoaded;
         _listView.MouseDoubleClick += OnListViewDoubleClick;
         _listView.KeyDown += OnListKeyDown;
-    }
-
-    private void SetupColumns()
-    {
-        if(_listView.View is not GridView gridView) return;
-
-        var totalWidth = _listView.ActualWidth;
-        gridView.AllowsColumnReorder = true;
-        gridView.Columns.Clear();
-        gridView.Columns.Add(new GridViewColumn()
-        {
-            Header = "ID",
-            DisplayMemberBinding = new Binding("Id"),
-            Width = totalWidth * 0.1
-        });
-        gridView.Columns.Add(new GridViewColumn()
-        {
-            Header = "Name",
-            DisplayMemberBinding = new Binding("Name"),
-            Width = totalWidth * 0.7,
-        });
-        gridView.Columns.Add(new GridViewColumn()
-        {
-            Header = "Type",
-            DisplayMemberBinding = new Binding("Type"),
-            Width = totalWidth * 0.2
-        });
     }
 
     public void SetWorkspace(Workspace workspace)
@@ -69,12 +41,6 @@ public class ItemListViewHandler
     {
         _listView.ItemsSource = null;
         _listView.ItemsSource = _workspace.Items;
-    }
-    
-    private void OnListViewLoaded(object sender, RoutedEventArgs e)
-    {
-        _listView.Loaded -= OnListViewLoaded;
-        SetupColumns();
     }
     
     private void OnListViewDoubleClick(object sender, MouseButtonEventArgs e)
