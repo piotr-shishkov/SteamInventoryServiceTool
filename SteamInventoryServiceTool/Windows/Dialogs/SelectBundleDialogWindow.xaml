@@ -12,8 +12,16 @@
         <ListView x:Name="ItemsListView" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="200" Margin="0 0 0 10">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Key" Width="200" DisplayMemberBinding="{Binding Key}" />
-                    <GridViewColumn Header="Value" Width="120" DisplayMemberBinding="{Binding Value}" />
+                    <GridViewColumn Header="Icon" Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding IconUrl}" Width="30" Height="30"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Value" Width="50" DisplayMemberBinding="{Binding Count.Value}" />
                 </GridView>
             </ListView.View>
         </ListView>

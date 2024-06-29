@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using SteamInventoryServiceTool.Data.Common;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Misc;
 using SteamInventoryServiceTool.Workspaces;
@@ -35,7 +36,7 @@ public class SelectBundleItemListViewHandler
     {
         if (e.Key == Key.Delete)
         {
-            var selectedItems = _listView.SelectedItems.Cast<KeyValuePair<KeyValuePair<int, string>, int>>().ToList();
+            var selectedItems = _listView.SelectedItems.Cast<BundleListViewElement>().ToList();
             if (selectedItems.Any())
             {
                 var result = MessageBox.Show(
@@ -48,7 +49,7 @@ public class SelectBundleItemListViewHandler
                 {
                     foreach (var item in selectedItems)
                     {
-                        _item.Bundle.Items.Remove(item.Key.Key);
+                        _item.Bundle.Items.Remove(item.Id);
                     }
                 }
                 Update();
@@ -66,9 +67,17 @@ public class SelectBundleItemListViewHandler
         _listView.Items.Clear();
         foreach (var item in _item.Bundle.Items)
         {
-            var itemName = _workspace.Items.FirstOrDefault(x => x.Id == item.Key)?.Name ?? item.Key.ToString();
-            var pair = new KeyValuePair<KeyValuePair<int ,string>, int>(new KeyValuePair<int, string>(item.Key, itemName), item.Value.Value);
-            _listView.Items.Add(pair);
+            var itemMatch = _workspace.Items.FirstOrDefault(x => x.Id == item.Key);
+            var itemName = itemMatch?.Name ?? item.Key.ToString();
+            var itemIconUrl = itemMatch?.IconUrl ?? string.Empty;
+            
+            _listView.Items.Add(new BundleListViewElement()
+            {
+                Id = item.Key,
+                Name = itemName,
+                Count = item.Value,
+                IconUrl = itemIconUrl
+            });
         }
     }
 }
