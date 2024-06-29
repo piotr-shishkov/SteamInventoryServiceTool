@@ -82,7 +82,10 @@ internal class MainWindowToolMenu
 
     private void OpenWorkspace()
     {
-        _workspaceManager.OpenWorkspace(WorkspaceFileOperations.OpenWorkspace());
+        var workspace = WorkspaceFileOperations.OpenWorkspace();
+        if(workspace == null) 
+            return;
+        _workspaceManager.OpenWorkspace(workspace);
     }
 
     private void SaveWorkspace()

@@ -32,7 +32,10 @@ public partial class WelcomeDialogWindow : Window
 
     private void OpenWorkspace(object sender, RoutedEventArgs e)
     {
-        _workspaceManager.OpenWorkspace(WorkspaceFileOperations.OpenWorkspace());
+        var workspace = WorkspaceFileOperations.OpenWorkspace();
+        if (workspace == null)
+            return;
+        _workspaceManager.OpenWorkspace(workspace);
         Close();
     }
 
