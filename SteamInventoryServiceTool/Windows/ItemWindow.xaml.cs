@@ -127,16 +127,16 @@ public partial class ItemWindow : Window
     {
         if (type == ItemOpenType.New)
         {
-            AddButton.Content = "Add Item";
+            AddButton.Content = "Add & New";
             AddButton.ToolTip = "Adds item to workspace and you can continue on new one based on current.";
-            AddNCloseButton.Content = "Add & Close";
+            AddNCloseButton.Content = "Add Item";
             AddNCloseButton.ToolTip = "Adds item to workspace and closes window.";
         }
         else if (type == ItemOpenType.Edit)
         {
             AddButton.Content = "Save & New";
             AddButton.ToolTip = "Saves item and you can continue creating new one based on current.";
-            AddNCloseButton.Content = "Save & Close";
+            AddNCloseButton.Content = "Save Item";
             AddButton.ToolTip = "Saves item and closes window.";
         }
     }
