@@ -32,20 +32,18 @@ internal class MainWindowToolMenu
         _toolMenu.AddSeparator("Workspace");
         AddItem("Open", "Workspace", OpenWorkspace);
         AddItem("New", "Workspace", _workspaceManager.NewWorkspace);
-        AddItem("Duplicate", "Workspace");
         _toolMenu.AddSeparator("Workspace");
         AddItem("Save", "Workspace", SaveWorkspace);
 
         AddItem("Items");
         AddItem("New", "Items", AddNewItem);
-        AddItem("Clear All", "Items");
         _toolMenu.AddSeparator("Items");
         AddItem("Tags Control", "Items", OpenTagEditor);
         _toolMenu.AddSeparator("Items");
         AddItem("Import", "Items");
-        AddItem("JSON", "Items/Import");
+        AddItem("JSON", "Items/Import", ImportItemsJson);
         AddItem("Export", "Items");
-        AddItem("JSON", "Items/Export");
+        AddItem("JSON", "Items/Export", ExportItemsJson);
 
         AddItem("Help");
         AddItem("Steamworks Documentation", "Help", WebUtility.OpenDocumentation);
@@ -105,6 +103,16 @@ internal class MainWindowToolMenu
     {
         var itemWindow = new ItemWindow();
         itemWindow.ShowAsNewItem();
+    }
+
+    private void ImportItemsJson()
+    {
+        ImportExportOperations.ImportItems(_workspaceManager.ActiveWorkspace);
+    }
+
+    private void ExportItemsJson()
+    {
+        ImportExportOperations.ExportItems(_workspaceManager.ActiveWorkspace);
     }
 
     #endregion
