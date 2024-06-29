@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="WelcomeDialogWindow" Height="350" Width="500"
         AllowsTransparency="True"
-        Background="#C8161920"
+        Background="#E1161920"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -35,6 +35,13 @@
                 <Button x:Name="OpenButton" Style="{StaticResource SteamButtonStyle}" Content="Open Workspace" Width="120" Margin="0 0 15 0"/>
                 <Button x:Name="NewButton" Style="{StaticResource SteamButtonStyle}" Content="New Workspace" Width="120" Margin="0 0 15 0"/>
             </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 5">
+            <TextBlock Foreground="Gray" Text="by Piotr Shishkov" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 10 5"/>
+            <TextBlock FontWeight="Medium">
+                <Hyperlink x:Name="GithubHyperLink" TextDecorations="None" NavigateUri="https://github.com/piotr-shishkov/SteamInventoryServiceTool">GitHub Repository</Hyperlink>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Window>
