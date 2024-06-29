@@ -167,6 +167,13 @@ public partial class ItemWindow : Window
 
     private void AddNCloseButtonOnClick(object sender, RoutedEventArgs e)
     {
+        var item = GetItem();
+        if (string.IsNullOrWhiteSpace(item.Name))
+        {
+            MessageBox.Show("Item name could not be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        
         AddCurrentItem();
         Close();
     }
