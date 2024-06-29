@@ -35,7 +35,7 @@ public class SelectBundleItemListViewHandler
     {
         if (e.Key == Key.Delete)
         {
-            var selectedItems = _listView.SelectedItems.Cast<KeyValuePair<int, ItemCount>>().ToList();
+            var selectedItems = _listView.SelectedItems.Cast<KeyValuePair<KeyValuePair<int, string>, int>>().ToList();
             if (selectedItems.Any())
             {
                 var result = MessageBox.Show(
@@ -48,7 +48,7 @@ public class SelectBundleItemListViewHandler
                 {
                     foreach (var item in selectedItems)
                     {
-                        _item.Bundle.Items.Remove(item.Key);
+                        _item.Bundle.Items.Remove(item.Key.Key);
                     }
                 }
                 Update();
@@ -63,7 +63,12 @@ public class SelectBundleItemListViewHandler
 
     private void FillItems()
     {
-        _listView.ItemsSource = null;
-        _listView.ItemsSource = _item.Bundle.Items.ToList();
+        _listView.Items.Clear();
+        foreach (var item in _item.Bundle.Items)
+        {
+            var itemName = _workspace.Items.FirstOrDefault(x => x.Id == item.Key)?.Name ?? item.Key.ToString();
+            var pair = new KeyValuePair<KeyValuePair<int ,string>, int>(new KeyValuePair<int, string>(item.Key, itemName), item.Value.Value);
+            _listView.Items.Add(pair);
+        }
     }
 }
