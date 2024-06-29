@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Misc;
 using SteamInventoryServiceTool.Windows.ListViews;
@@ -22,10 +23,12 @@ public partial class SelectBundleDialogWindow : Window
         _activeWorkspace = WorkspaceManager.Instance.ActiveWorkspace;
         _bundleListHandler = new SelectBundleItemListViewHandler(ItemsListView, Item, _activeWorkspace);
         
+        ItemsComboBox.SelectionChanged += ItemComboBoxSelectionChanged;
         AddItemButton.Click += AddItem;
         CloseButton.Click += CloseDialog;
         
         UpdateComboBox();
+        ItemComboBoxSelectionChanged(default, default);
     }
 
     private void UpdateComboBox()
@@ -36,6 +39,11 @@ public partial class SelectBundleDialogWindow : Window
         ItemsComboBox.ItemsSource = _activeWorkspace.Items;
         ItemsComboBox.DisplayMemberPath = "Name";
         ItemsComboBox.SelectedIndex = 0;
+    }
+
+    private void ItemComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        AddItemButton.IsEnabled = ItemsComboBox.Items.Count > 0 && ItemsComboBox.SelectedIndex >= 0;
     }
 
     private void AddItem(object sender, RoutedEventArgs e)
