@@ -22,4 +22,12 @@
     <Resource Include="Resources\AppLogo_Small.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Windows\Dialogs\AboutDialogWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

@@ -50,10 +50,10 @@ internal class MainWindowToolMenu
         AddItem("JSON", "Items/Export");
 
         AddItem("Help");
-        AddItem("Steamworks Documentation", "Help");
+        AddItem("Steamworks Documentation", "Help", WebUtility.OpenDocumentation);
         _toolMenu.AddSeparator("Help");
-        AddItem("About S.I.S.T.", "Help");
-        AddItem("Github Page", "Help");
+        AddItem("About S.I.S.T.", "Help", ShowAboutDialog);
+        AddItem("Github Page", "Help", WebUtility.OpenGithub);
     }
 
     private void EditWorkspace()
@@ -80,12 +80,12 @@ internal class MainWindowToolMenu
         _activeWorkspace = workspace;
     }
 
-    public void OpenWorkspace()
+    private void OpenWorkspace()
     {
         _workspaceManager.OpenWorkspace(WorkspaceFileOperations.OpenWorkspace());
     }
 
-    public void SaveWorkspace()
+    private void SaveWorkspace()
     {
         _activeWorkspace.Save();
     }
@@ -104,6 +104,15 @@ internal class MainWindowToolMenu
     {
         var itemWindow = new ItemWindow();
         itemWindow.ShowAsNewItem();
+    }
+
+    #endregion
+
+    #region Help Controls
+
+    private void ShowAboutDialog()
+    {
+        new AboutDialogWindow().ShowDialog();
     }
 
     #endregion

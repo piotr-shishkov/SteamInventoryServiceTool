@@ -8,20 +8,18 @@ using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows.Dialogs;
 
-public partial class WelcomeDialogWindow : Window
+public partial class AboutDialogWindow : Window
 {
     public string AssemblyVersion { get; }
-
+    
     private WorkspaceManager _workspaceManager;
 
-    public WelcomeDialogWindow()
+    public AboutDialogWindow()
     {
         InitializeComponent();
         _workspaceManager = WorkspaceManager.Instance;
-
-        OpenButton.Click += OpenWorkspace;
-        NewButton.Click += NewWorkspace;
-        ExitButton.Click += ExitTool;
+        
+        CloseButton.Click += CloseWindow;
 
         GithubHyperLink.NavigateUri = new Uri(Constants.GITHUB_PAGE_LINK);
         GithubHyperLink.RequestNavigate += RequestNavigate;
@@ -29,23 +27,10 @@ public partial class WelcomeDialogWindow : Window
         AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         DataContext = this;
     }
-
-    private void OpenWorkspace(object sender, RoutedEventArgs e)
+    
+    private void CloseWindow(object sender, RoutedEventArgs e)
     {
-        _workspaceManager.OpenWorkspace(WorkspaceFileOperations.OpenWorkspace());
         Close();
-    }
-
-    private void NewWorkspace(object sender, RoutedEventArgs e)
-    {
-        _workspaceManager.NewWorkspace();
-        Close();
-        new EditWorkspaceDialogWindow(_workspaceManager.ActiveWorkspace).ShowDialog();
-    }
-
-    private void ExitTool(object sender, RoutedEventArgs e)
-    {
-        Application.Current.Shutdown();
     }
 
     private void RequestNavigate(object sender, RequestNavigateEventArgs e)
