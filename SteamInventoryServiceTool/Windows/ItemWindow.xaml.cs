@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Threading;
 using SteamInventoryServiceTool.Data.Steam;
@@ -39,9 +40,10 @@ public partial class ItemWindow : Window
     private void SetupElements()
     {
         var types = Enum.GetNames(typeof(ItemType));
+        TypeComboBox.SelectionChanged += OnTypeComboBoxSelectionChanged;
         TypeComboBox.ItemsSource = types;
         TypeComboBox.SelectedIndex = 0;
-            
+
         var prices = Enum.GetNames(typeof(PriceCategories));
         for (var i = 0; i < prices.Length; i++)
         {
@@ -61,6 +63,12 @@ public partial class ItemWindow : Window
         _disptacherTimer.Interval = TimeSpan.FromMilliseconds(500);
         
         ToggleAutoRefresh();
+    }
+
+    private void OnTypeComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var currentType = (ItemType)TypeComboBox.SelectedIndex;
+        BundleEditButton.IsEnabled = currentType != ItemType.Item;
     }
 
     private void OpenTagEditor(object sender, RoutedEventArgs e)
@@ -133,6 +141,9 @@ public partial class ItemWindow : Window
         AddCurrentItem();
         var item = GetItem();
         item.Id = _workspaceManager.ActiveWorkspace.GetNextItemId();
+        
+        if(_openType == ItemOpenType.Edit)
+            SetOpenType(ItemOpenType.New);
         FillItem(item);
     }
 
