@@ -204,10 +204,12 @@ public partial class ItemWindow : Window
         var backColor = ColorPickerBackground.SelectedColor!.Value;
         var textColor = ColorPickerName.SelectedColor!.Value;
         var id = int.Parse(IdTextBox.Text);
+        var type = (ItemType)TypeComboBox.SelectedIndex;
+        
         var item = new Item(id)
         {
             Name = NameTextBox.Text,
-            Type = (ItemType)TypeComboBox.SelectedIndex,
+            Type = type,
             Description = DescriptionTextBox.Text,
             DisplayType = DisplayTypeTextBox.Text,
             Marketable = MarketableCheckBox.IsChecked!.Value,
@@ -218,7 +220,7 @@ public partial class ItemWindow : Window
             IconUrlLarge = IconUrlLargeTextBox.Text,
             PriceCategory = new PriceCategory((PriceCategories)PriceComboBox.SelectedIndex),
             Tags = new Tags(TagsTextBox.Text),
-            Bundle = new Bundle(BundleTextBox.Text),
+            Bundle = type == ItemType.Item ? new Bundle() : new Bundle(BundleTextBox.Text),
             Promo = new Promo(PromoTextBox.Text),
             GameOnly = GameOnlyCheckBox.IsChecked!.Value,
             Hidden = HiddenCheckBox.IsChecked!.Value,
