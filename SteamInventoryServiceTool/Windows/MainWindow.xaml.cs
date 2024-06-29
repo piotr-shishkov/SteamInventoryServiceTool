@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Utility;
+using SteamInventoryServiceTool.Windows.Dialogs;
 using SteamInventoryServiceTool.Windows.ListViews;
 using SteamInventoryServiceTool.Workspaces;
 
@@ -33,6 +34,8 @@ public partial class MainWindow : Window
 		OnWorkspaceChanged(_workspaceManager.ActiveWorkspace);
 
 		Application.Current.MainWindow.Closed += MainWindowOnClosed;
+
+		new WelcomeDialogWindow().ShowDialog();
 	}
 
 	private void MainWindowOnClosed(object? sender, EventArgs e)
