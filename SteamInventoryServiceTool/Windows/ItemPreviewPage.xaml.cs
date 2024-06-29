@@ -4,6 +4,7 @@ using System.Windows.Media;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Fields;
 using SteamInventoryServiceTool.Utility;
+using SteamInventoryServiceTool.Workspaces;
 
 namespace SteamInventoryServiceTool.Windows;
 
@@ -28,6 +29,7 @@ public partial class ItemPreviewPage : Page
         ItemNameLabel.Foreground = new SolidColorBrush(item.NameColor.Color);
         ItemFrame.Stroke = new SolidColorBrush(item.BackgroundColor.Color);
         ItemImage.Source = await WebImageDownload.Get(item.IconUrlLarge);
+        GameLogoImage.Source = await SteamUtility.GetAppIcon(WorkspaceManager.Instance.ActiveWorkspace.AppId);
     }
 
     private string FormatTags(Item item)

@@ -62,9 +62,14 @@ public partial class MainWindow : Window
 		}
 	}
 
-	private void OnWorkspaceChanged(Workspace workspace)
+	private async void OnWorkspaceChanged(Workspace workspace)
 	{
+		var steamAppName = await SteamUtility.GetAppName(workspace.AppId);
 		Title = $"{Constants.APP_NAME} | {workspace.Name} | APPID: {workspace.AppId}";
+		if (steamAppName != null)
+		{
+			Title += $" [{steamAppName}]";
+		}
 		_toolMenu.SetWorkspace(_workspaceManager.ActiveWorkspace);
 		_itemListHandler.SetWorkspace(_workspaceManager.ActiveWorkspace);
 	}
