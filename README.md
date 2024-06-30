@@ -6,6 +6,10 @@ Easy (not very) create/edit Steam Inventory Service item definitions.
 ## ⚠️ W-I-P NOTICE
 The tool is still under development and does not include some Inventory Service features. If you wish to help, see the [Contributing](#-contributing) section.
 
+## ⚒️ Requirements
+
+- [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0#:~:text=x86-,.NET%20Desktop%20Runtime,-6.0.31)
+
 ## 📑 Description
 
 This tool was created to simplify the work with **Steam Inventory Service** for developers.
