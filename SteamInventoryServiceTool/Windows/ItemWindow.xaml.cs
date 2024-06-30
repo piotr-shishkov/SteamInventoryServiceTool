@@ -313,6 +313,7 @@ public partial class ItemWindow : Window
     {
         var item = GetItem();
         _previewPage.UpdateItem(item);
+        Title = $"{item.Type} - {item.Name}";
     }
     #endregion
 }
