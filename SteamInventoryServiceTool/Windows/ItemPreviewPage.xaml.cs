@@ -20,16 +20,17 @@ public partial class ItemPreviewPage : Page
 
     public async void UpdateItem(Item item)
     {
-        ItemNameLabel.Content = item.Name;
-        ItemTypeLabel.Content = item.DisplayType;
+        ItemNameTextBlock.Text = item.Name;
+        ItemTypeTextBlock.Text = item.DisplayType;
         ItemDescription.Text = item.Description;
         ItemTags.Text = FormatTags(item);
         ItemPriceLabel.Content = item.PriceCategory.ToString();
 
-        ItemNameLabel.Foreground = new SolidColorBrush(item.NameColor.Color);
+        ItemNameTextBlock.Foreground = new SolidColorBrush(item.NameColor.Color);
         ItemFrame.Stroke = new SolidColorBrush(item.BackgroundColor.Color);
         ItemImage.Source = await WebImageDownload.Get(item.IconUrlLarge);
         GameLogoImage.Source = await SteamUtility.GetAppIcon(WorkspaceManager.Instance.ActiveWorkspace.AppId);
+        GameNameTextBlock.Text = await SteamUtility.GetAppName(WorkspaceManager.Instance.ActiveWorkspace.AppId);
     }
 
     private string FormatTags(Item item)
