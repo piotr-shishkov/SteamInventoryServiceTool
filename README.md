@@ -54,11 +54,17 @@ Issues will help this project become bug-free.
 ### Pull Requests
 Pull requests are welcome, they will help fix bugs and extend the functionality of the project.
 
+<br>
+
 ## 🔗 Links
 - [Steamworks Inventory Service Documentation](https://partner.steamgames.com/doc/features/inventory/schema#PlaytimeDrops)
 
+<br>
+
 ## 🫂 Attribution
 - [Extended WPF Toolkit™](https://github.com/xceedsoftware/wpftoolkit)
+
+<br>
 
 ## 🪪 License
 - MIT
