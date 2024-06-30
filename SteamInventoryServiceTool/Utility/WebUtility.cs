@@ -22,11 +22,16 @@ public static class WebUtility
 
     public static void OpenGithub()
     {
-        OpenUrl(Constants.GITHUB_PAGE_LINK);
+        OpenUrl(Constants.Links.GITHUB_PAGE);
     }
     
     public static void OpenDocumentation()
     {
-        OpenUrl(Constants.STEAMWORKS_DOCUMENTATION_LINK);
+        OpenUrl(Constants.Links.STEAMWORKS_DOCUMENTATION);
+    }
+    
+    public static void OpenDropTimeDocumentation()
+    {
+        OpenUrl(Constants.Links.STEAMWORKS_DROPTIME_HElP);
     }
 }

@@ -22,7 +22,6 @@ public partial class WelcomeDialogWindow : Window
         NewButton.Click += NewWorkspace;
         ExitButton.Click += ExitTool;
 
-        GithubHyperLink.NavigateUri = new Uri(Constants.GITHUB_PAGE_LINK);
         GithubHyperLink.RequestNavigate += RequestNavigate;
         
         AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -52,6 +51,6 @@ public partial class WelcomeDialogWindow : Window
 
     private void RequestNavigate(object sender, RequestNavigateEventArgs e)
     {
-        WebUtility.OpenUrl(e.Uri.AbsoluteUri);
+        WebUtility.OpenGithub();
     }
 }

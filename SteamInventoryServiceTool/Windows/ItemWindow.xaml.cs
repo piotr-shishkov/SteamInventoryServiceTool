@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 using SteamInventoryServiceTool.Data.Steam;
 using SteamInventoryServiceTool.Data.Steam.Fields;
 using SteamInventoryServiceTool.Windows.Dialogs;
 using SteamInventoryServiceTool.Workspaces;
+using WebUtility = SteamInventoryServiceTool.Utility.WebUtility;
 
 namespace SteamInventoryServiceTool.Windows;
 
@@ -65,6 +68,8 @@ public partial class ItemWindow : Window
         CloseButton.Click += CloseButtonOnClick;
         RefreshButton.Click += RefreshButtonOnClick;
         
+        DropHelpHyperLink.RequestNavigate += OnDropHelpNavigateRequest;
+        
         ToggleAutoRefresh();
     }
 
@@ -95,12 +100,17 @@ public partial class ItemWindow : Window
         FillItem(promoSelector.Item);
     }
 
+    private void OnDropHelpNavigateRequest(object sender, RequestNavigateEventArgs e)
+    {
+        WebUtility.OpenDropTimeDocumentation();
+    }
+
     private void CreateItemPreview()
     {
         _previewPage = new ItemPreviewPage();
         this.PreviewFrame.Navigate(_previewPage);
     }
-        
+
     public void ShowAsNewItem()
     {
         SetOpenType(ItemOpenType.New);

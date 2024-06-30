@@ -7,6 +7,10 @@ public static class Constants
     public const string EXTENSION_WORKSPACE = ".sistwrk";
     public const string EXTENSION_JSON = ".json";
 
-    public const string GITHUB_PAGE_LINK = "https://github.com/piotr-shishkov/SteamInventoryServiceTool";
-    public const string STEAMWORKS_DOCUMENTATION_LINK = "https://partner.steamgames.com/doc/features/inventory/schema#PromoItems";
+    public static class Links
+    {
+        public const string GITHUB_PAGE = "https://github.com/piotr-shishkov/SteamInventoryServiceTool";
+        public const string STEAMWORKS_DOCUMENTATION = "https://partner.steamgames.com/doc/features/inventory/schema#PromoItems";
+        public const string STEAMWORKS_DROPTIME_HElP = "https://partner.steamgames.com/doc/features/inventory/schema#PlaytimeDrops";
+    }
 }

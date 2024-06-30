@@ -81,7 +81,10 @@
             <CheckBox x:Name="GrantedManuallyCheckBox" Content="Granted Manually" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="19"/>
             <CheckBox x:Name="UseBundlePriceCheckBox" Content="Use Bundle Price" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" VerticalAlignment="Center" Grid.Row="20"/>
             <CheckBox x:Name="AutoStackCheckBox" Content="Auto Stack" Margin="12,0,264,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Height="23" Grid.Row="21"/>
-            <CheckBox x:Name="UseDropLimitCheckBox" Content="Use Drop Limit" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="16"/>
+            <CheckBox x:Name="UseDropLimitCheckBox" Content="Use Drop Limit" Margin="264,0,42,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="16"/>
+            <TextBlock FontWeight="Medium" TextAlignment="Right" FontSize="18" Margin="484, 0, 12, 0" Grid.Row="16">
+                <Hyperlink x:Name="DropHelpHyperLink" NavigateUri="X" TextDecorations="None">?</Hyperlink>
+            </TextBlock>
             <TextBox x:Name="DropIntervalTextBox" Margin="370,1,12,1" FontFamily="Arial" Padding="0,2,0,2" Grid.ColumnSpan="1" FontSize="16" InputScope="Number" Grid.Row="18"/>
             <Label Content="Drop Interval:" Margin="264,0,152,0" Padding="0,0,0,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="1" Grid.Row="18" VerticalContentAlignment="Center"/>
             <CheckBox x:Name="UseDropWindowCheckBox" Content="Use Drop Window" Margin="264,0,12,0" FontSize="18" VerticalContentAlignment="Center" BorderThickness="1,1,1,1" Grid.Row="19"/>

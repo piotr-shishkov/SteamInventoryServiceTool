@@ -20,7 +20,6 @@ public partial class AboutDialogWindow : Window
         
         CloseButton.Click += CloseWindow;
 
-        GithubHyperLink.NavigateUri = new Uri(Constants.GITHUB_PAGE_LINK);
         GithubHyperLink.RequestNavigate += RequestNavigate;
         
         AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -34,6 +33,6 @@ public partial class AboutDialogWindow : Window
 
     private void RequestNavigate(object sender, RequestNavigateEventArgs e)
     {
-        WebUtility.OpenUrl(e.Uri.AbsoluteUri);
+        WebUtility.OpenGithub();
     }
 }
