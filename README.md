@@ -2,6 +2,9 @@
 
 Easy (not very) create/edit Steam Inventory Service item definitions.
 
+![GitHub License](https://img.shields.io/github/license/piotr-shishkov/SteamInventoryServiceTool)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/piotr-shishkov/SteamInventoryServiceTool?color=blue)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/piotr-shishkov/SteamInventoryServiceTool?color=blue)
 
 ## ⚠️ W-I-P NOTICE
 The tool is still under development and does not include some Inventory Service features. If you wish to help, see the [Contributing](#-contributing) section.
