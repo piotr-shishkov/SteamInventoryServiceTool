@@ -57,7 +57,7 @@ Pull requests are welcome, they will help fix bugs and extend the functionality 
 <br>
 
 ## 🔗 Links
-- [Steamworks Inventory Service Documentation](https://partner.steamgames.com/doc/features/inventory/schema#PlaytimeDrops)
+- [Steamworks Inventory Service Documentation](https://partner.steamgames.com/doc/features/inventory/schema)
 
 <br>
 
