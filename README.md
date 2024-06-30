@@ -4,7 +4,7 @@ Easy (not very) create/edit Steam Inventory Service item definitions.
 
 
 ## ⚠️ W-I-P NOTICE
-The tool is still under development and does not include some Inventory Service features. If you wish to help, see the [Contributing](#contributing) section.
+The tool is still under development and does not include some Inventory Service features. If you wish to help, see the [Contributing](#-contributing) section.
 
 ## 📑 Description
 
