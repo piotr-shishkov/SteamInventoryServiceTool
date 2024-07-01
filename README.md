@@ -27,14 +27,15 @@ This tool was created to simplify the work with **Steam Inventory Service** for 
 
 ### ☑️ Features Planned
 
-1. [ ] Drop-start
-2. [ ] Exchange
-3. [ ] Price (not category)
-4. [ ] Tag Generators
-5. [ ] Tag Generator Name
-6. [ ] Tag Generator Values
-7. [ ] Store Tags
-8. [ ] Store Images
+1. [ ] Field: Drop-start
+2. [ ] Field: Exchange
+3. [ ] Field: Price (not category)
+4. [ ] Field: Tag Generators
+5. [ ] Field: Tag Generator Name
+6. [ ] Field: Tag Generator Values
+7. [ ] Field: Store Tags
+8. [ ] Field: Store Images
+9. [ ] Bulk Actions
 
 You can also post your feature requests!
 
