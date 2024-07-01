@@ -76,7 +76,7 @@ public partial class ItemWindow : Window
     private void OnTypeComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var currentType = (ItemType)TypeComboBox.SelectedIndex;
-        BundleEditButton.IsEnabled = currentType != ItemType.Item;
+        BundleEditButton.IsEnabled = currentType != ItemType.item;
     }
 
     private void OpenTagEditor(object sender, RoutedEventArgs e)
@@ -254,7 +254,7 @@ public partial class ItemWindow : Window
             IconUrlLarge = IconUrlLargeTextBox.Text,
             PriceCategory = new PriceCategory((PriceCategories)PriceComboBox.SelectedIndex),
             Tags = new Tags(TagsTextBox.Text),
-            Bundle = type == ItemType.Item ? new Bundle() : new Bundle(BundleTextBox.Text),
+            Bundle = type == ItemType.item ? new Bundle() : new Bundle(BundleTextBox.Text),
             Promo = new Promo(PromoTextBox.Text),
             GameOnly = GameOnlyCheckBox.IsChecked!.Value,
             Hidden = HiddenCheckBox.IsChecked!.Value,

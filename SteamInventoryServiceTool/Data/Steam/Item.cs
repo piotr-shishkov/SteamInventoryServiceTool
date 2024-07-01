@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SteamInventoryServiceTool.Data.Steam.Fields;
 using System;
+using Newtonsoft.Json.Converters;
 
 namespace SteamInventoryServiceTool.Data.Steam;
 
@@ -20,6 +21,7 @@ public class Item
     public string DisplayType { get; set; }
 
     [JsonProperty("type")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public ItemType Type { get; set; }
         
     [JsonProperty("bundle")]
