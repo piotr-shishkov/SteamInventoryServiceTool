@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SteamInventoryServiceTool.Utility;
 
 namespace SteamInventoryServiceTool.Workspaces;
@@ -35,6 +36,8 @@ public class WorkspaceManager : Singleton<WorkspaceManager>
         }
         _activeWorkspace = workspace;
         _activeWorkspace.Updated += OnActiveWorkspaceUpdated;
+        var maxItemId = _activeWorkspace.Items.MaxBy(x => x.Id)?.Id ?? 0;
+        _activeWorkspace.LastCreatedId = Math.Max(_activeWorkspace.LastCreatedId, Math.Max(1, maxItemId));
         WorkspaceChanged?.Invoke(_activeWorkspace);
     }
 

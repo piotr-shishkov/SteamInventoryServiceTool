@@ -14,6 +14,7 @@ public class Workspace
 	public string Name { get; set; }
 	public Dictionary<string, List<string>> Tags { get; set; } = new();
 	public List<Item> Items { get; set; } = new();
+	public int LastCreatedId { get; set; } = 1;
 		
 	[JsonIgnore]
 	public string FilePath { get; set; }
@@ -70,6 +71,8 @@ public class Workspace
 			Items.Remove(existingItem);
 		}
 		Items.Add(item);
+		if(item.Id > LastCreatedId)
+			LastCreatedId = item.Id;
 		SortItems();
 		Update();
 		Save();
@@ -93,21 +96,22 @@ public class Workspace
 
 	public int GetNextItemId()
 	{
-		if (Items.Count == 0)
-			return 1;
+		return LastCreatedId + 1;
 
-		// Extract IDs and sort them
-		var ids = Items.Select(item => item.Id).OrderBy(id => id).ToList();
-
-		// Check for the first missing ID
-		for (var i = 0; i < ids.Count; i++)
-		{
-			if (ids[i] != i + 1)
-				return i + 1;
-		}
-
-		// If all IDs are sequential, return the next ID
-		return ids.Count + 1;
+		// Deprecated cause can create item with same id which was another item before
+		//
+		// // Extract IDs and sort them
+		// var ids = Items.Select(item => item.Id).OrderBy(id => id).ToList();
+		//
+		// // Check for the first missing ID
+		// for (var i = 0; i < ids.Count; i++)
+		// {
+		// 	if (ids[i] != i + 1)
+		// 		return i + 1;
+		// }
+		//
+		// // If all IDs are sequential, return the next ID
+		// return ids.Count + 1;
 	}
 
 	public void Save()
