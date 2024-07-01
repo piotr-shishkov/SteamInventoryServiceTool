@@ -266,7 +266,7 @@ public partial class ItemWindow : Window
             UseDropWindow = UseDropWindowCheckBox.IsChecked!.Value,
         };
         
-        if(int.TryParse(DropIntervalTextBox.Text, out var dropLimitValue))
+        if(int.TryParse(DropLimitTextBox.Text, out var dropLimitValue))
         {
             item.DropLimit = dropLimitValue;
         }
