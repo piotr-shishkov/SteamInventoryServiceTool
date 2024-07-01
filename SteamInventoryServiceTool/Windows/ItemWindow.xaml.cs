@@ -229,6 +229,7 @@ public partial class ItemWindow : Window
         DropLimitTextBox.Text = item.DropLimit.ToString();
         DropIntervalTextBox.Text = item.DropInterval.ToString();
         UseDropWindowCheckBox.IsChecked = item.UseDropWindow;
+        DropWindowTextBox.Text = item.DropWindow.ToString();
         DropPerWindowTextBox.Text = item.DropMaxPerWindow.ToString();
     }
 
@@ -273,6 +274,11 @@ public partial class ItemWindow : Window
         if(int.TryParse(DropIntervalTextBox.Text, out var dropIntervalValue))
         {
             item.DropInterval = dropIntervalValue;
+        }
+        
+        if (int.TryParse(DropWindowTextBox.Text, out var dropWindow))
+        {
+            item.DropWindow = dropWindow;
         }
 
         if (int.TryParse(DropPerWindowTextBox.Text, out var dropPerWindowValue))
