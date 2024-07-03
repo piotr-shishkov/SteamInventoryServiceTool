@@ -20,6 +20,8 @@ public partial class ItemPreviewPage : Page
 
     public async void UpdateItem(Item item)
     {
+        GameLogoImage.Source = null;
+        
         ItemNameTextBlock.Text = item.Name;
         ItemTypeTextBlock.Text = item.DisplayType;
         ItemDescription.Text = item.Description;
@@ -28,9 +30,9 @@ public partial class ItemPreviewPage : Page
 
         ItemNameTextBlock.Foreground = new SolidColorBrush(item.NameColor.Color);
         ItemFrame.Stroke = new SolidColorBrush(item.NameColor.Color);
-        ItemImage.Source = await WebImageDownload.Get(item.IconUrlLarge);
         GameLogoImage.Source = await SteamUtility.GetAppIcon(WorkspaceManager.Instance.ActiveWorkspace.AppId);
         GameNameTextBlock.Text = await SteamUtility.GetAppName(WorkspaceManager.Instance.ActiveWorkspace.AppId);
+        ItemImage.Source = await WebImageDownload.Get(item.IconUrlLarge);
     }
 
     private string FormatTags(Item item)
