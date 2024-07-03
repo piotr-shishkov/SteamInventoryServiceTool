@@ -30,6 +30,8 @@ public class HexColorJsonConverter : JsonConverter<HexColor>
         {
             return new HexColor(0, 255, 255, 255);
         }
+        if(!jsonString.StartsWith('#'))
+            jsonString = $"#{jsonString}";
         var color = (Color)ColorConverter.ConvertFromString(jsonString);
         return new HexColor(color.A, color.R, color.G, color.B);
     }
@@ -42,7 +44,7 @@ public class HexColorJsonConverter : JsonConverter<HexColor>
             return;
         }
         var color = value.Color;
-        var hexString = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        var hexString = $"{color.R:X2}{color.G:X2}{color.B:X2}";
         if (color.A == 0)
             hexString = "";
         writer.WriteValue(hexString);
