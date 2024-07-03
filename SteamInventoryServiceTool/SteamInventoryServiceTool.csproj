@@ -6,8 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\AppLogo_Small.ico</ApplicationIcon>
-    <AssemblyVersion>0.1.0.4</AssemblyVersion>
-    <Version>0.1.0.4</Version>
+    <AssemblyVersion>0.1.0.5</AssemblyVersion>
+    <Version>0.1.0.5</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>false</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
