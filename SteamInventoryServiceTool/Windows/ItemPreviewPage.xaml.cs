@@ -27,7 +27,7 @@ public partial class ItemPreviewPage : Page
         ItemPriceLabel.Content = item.PriceCategory.ToString();
 
         ItemNameTextBlock.Foreground = new SolidColorBrush(item.NameColor.Color);
-        ItemFrame.Stroke = new SolidColorBrush(item.BackgroundColor.Color);
+        ItemFrame.Stroke = new SolidColorBrush(item.NameColor.Color);
         ItemImage.Source = await WebImageDownload.Get(item.IconUrlLarge);
         GameLogoImage.Source = await SteamUtility.GetAppIcon(WorkspaceManager.Instance.ActiveWorkspace.AppId);
         GameNameTextBlock.Text = await SteamUtility.GetAppName(WorkspaceManager.Instance.ActiveWorkspace.AppId);
