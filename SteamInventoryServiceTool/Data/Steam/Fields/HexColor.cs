@@ -6,13 +6,13 @@ namespace SteamInventoryServiceTool.Data.Steam.Fields;
 
 public class HexColor
 {
-    public Color Color { get; set; } = Color.FromRgb(255, 255, 255);
+    public Color Color { get; set; } = Color.FromArgb(255, 255, 255, 255);
 
     public HexColor() { }
 
-    public HexColor(byte r, byte g, byte b)
+    public HexColor(byte a, byte r, byte g, byte b)
     {
-        Color = Color.FromRgb(r, g, b);
+        Color = Color.FromArgb(a, r, g, b);
     }
 }
 
@@ -25,8 +25,13 @@ public class HexColorJsonConverter : JsonConverter<HexColor>
         {
             return new HexColor();
         }
+
+        if (string.IsNullOrWhiteSpace(jsonString))
+        {
+            return new HexColor(0, 255, 255, 255);
+        }
         var color = (Color)ColorConverter.ConvertFromString(jsonString);
-        return new HexColor(color.R, color.G, color.B);
+        return new HexColor(color.A, color.R, color.G, color.B);
     }
 
     public override void WriteJson(JsonWriter writer, HexColor? value, JsonSerializer serializer)
@@ -38,6 +43,8 @@ public class HexColorJsonConverter : JsonConverter<HexColor>
         }
         var color = value.Color;
         var hexString = $"#{color.R:X2}{color.G:X2}{color.B:X2}";
+        if (color.A == 0)
+            hexString = "";
         writer.WriteValue(hexString);
     }
 }

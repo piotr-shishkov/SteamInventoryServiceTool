@@ -56,8 +56,8 @@ public partial class ItemPreviewPage : Page
             DisplayType = "Common Item",
             Description = "Some interesting description about this item...",
             PriceCategory = new PriceCategory(PriceCategories.VLV1000),
-            BackgroundColor = new HexColor(134, 80, 172),
-            NameColor = new HexColor(134, 80, 172),
+            BackgroundColor = new HexColor(255, 134, 80, 172),
+            NameColor = new HexColor(255, 134, 80, 172),
             IconUrlLarge = "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQh5hlcX0nvUOGsx8DdQBJjIAVHubSaIAlp1fb3ZjRG48u7lYuOhbmiZLmElGgIvJxzjLiYodWi3wGwrxE_MWmgI4SUJFc8Zl_R_VPqybvqm9bi6-x3KLPD/330x192?allow_animated=1",
             IconUrl = "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQh5hlcX0nvUOGsx8DdQBJjIAVHubSaIAlp1fb3ZjRG48u7lYuOhbmiZLmElGgIvJxzjLiYodWi3wGwrxE_MWmgI4SUJFc8Zl_R_VPqybvqm9bi6-x3KLPD/330x192?allow_animated=1",
             Tags = new Tags()
