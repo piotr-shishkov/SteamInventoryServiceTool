@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace SteamInventoryServiceTool.Data.Steam.Fields;
 
@@ -77,8 +78,15 @@ public class PriceCategoryJsonConverter : JsonConverter<PriceCategory>
         var jsonString = reader.Value as string;
         if (jsonString == null)
             return new PriceCategory(PriceCategories.None);
-        else
-            return new PriceCategory((PriceCategories)Enum.Parse(typeof(PriceCategories), jsonString));
+
+        var split = jsonString.Split(';');
+        if (split.Length > 0)
+        {
+            var price = split.LastOrDefault(x => x.Contains("VLV"));
+            if(price != null)
+                return new PriceCategory((PriceCategories)Enum.Parse(typeof(PriceCategories), price));
+        }
+        return new PriceCategory(PriceCategories.None);
     }
 
     public override void WriteJson(JsonWriter writer, PriceCategory? value, JsonSerializer serializer)
@@ -89,10 +97,10 @@ public class PriceCategoryJsonConverter : JsonConverter<PriceCategory>
             return;
         }
         var enumValue = value.Category;
-        if(enumValue == PriceCategories.None) 
+        if (enumValue == PriceCategories.None)
             writer.WriteNull();
         else
-            writer.WriteValue(enumValue.ToString());
+            writer.WriteValue($"1;{enumValue.ToString()}");
     }
 }
 

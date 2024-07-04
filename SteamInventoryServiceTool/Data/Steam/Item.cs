@@ -34,7 +34,7 @@ public class Item
     // TODO: exchange
     // TODO: price
 
-    [JsonProperty("price_category")]
+    [JsonProperty("price")]
     public PriceCategory PriceCategory { get; set; } = new PriceCategory(PriceCategories.None);
 
     [JsonProperty("background_color")]
